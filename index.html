@@ -1,0 +1,2536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MCA · Marketing Craft Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['"Nunito Sans"', 'Avenir Next', 'system-ui', 'sans-serif'],
+        },
+        colors: {
+          'super-blue': '#236CFF',
+          'super-blue-dark': '#1A52D9',
+          'blueberry': '#00254A',
+          'agave-30': '#81F2FE',
+          'agave-20': '#C2F5FF',
+          'wintermint': '#EFF4F9',
+          'tofu': '#F4F4EF',
+          'accent-light': '#E8F0FF',
+          'rule': '#D4DEE8',
+          'rule-soft': '#E8EEF4',
+          'muted': '#7A8FA3',
+          'text-soft': '#4A6580',
+          'cat-agent': '#FF5C37',
+          'cat-agent-bg': '#FFF0EC',
+          'cat-playbook': '#003E31',
+          'cat-playbook-bg': '#E6F5F1',
+          'cat-course': '#236CFF',
+          'cat-course-bg': '#E8F0FF',
+          'cat-skill': '#AC6500',
+          'cat-skill-bg': '#FFF2C1',
+          'cat-event': '#7B2D8E',
+          'cat-event-bg': '#F5ECFA',
+          'honey': '#F9C741',
+          'honey-10': '#FFF2C1',
+          'honey-80': '#AC6500',
+          'kiwi': '#3BD85E',
+          'tomato': '#FF5C37',
+          'spearmint': '#003E31',
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body {
+    font-family: 'Nunito Sans', 'Avenir Next', system-ui, sans-serif;
+    background: #EFF4F9;
+    color: #00254A;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .lockup-eyebrow {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #236CFF;
+    line-height: 1;
+    display: block;
+    margin-bottom: 3px;
+  }
+  .lockup-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #236CFF;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7A8FA3;
+  }
+  .view { display: none; }
+  .view.active { display: block; }
+  .nav-tab {
+    background: transparent;
+    color: #7A8FA3;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+  .nav-tab:hover { color: #00254A; }
+  .nav-tab.active {
+    background: #E8F0FF;
+    color: #236CFF;
+  }
+  .input-search:focus {
+    border-color: #236CFF !important;
+    box-shadow: 0 0 0 4px rgba(35, 108, 255, 0.12) !important;
+  }
+  .quick-card { transition: all 0.18s ease; }
+  .quick-card:hover {
+    border-color: #236CFF;
+    transform: translateY(-1px);
+  }
+  .result-card {
+    transition: all 0.35s ease;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  .result-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .pillar-card { transition: all 0.18s ease; }
+  .pillar-card:hover {
+    border-color: #236CFF;
+    transform: translateY(-2px);
+  }
+  .card-hover { transition: all 0.18s ease; }
+  .card-hover:hover {
+    border-color: #236CFF;
+    box-shadow: 0 8px 20px -8px rgba(0, 37, 74, 0.12);
+  }
+  .phase-row { transition: background 0.15s ease; }
+  .phase-row:hover { background: #F8FAFC; }
+  .phase-row.user-fits {
+    background: linear-gradient(90deg, rgba(35, 108, 255, 0.06) 0%, transparent 100%);
+    border-left: 3px solid #236CFF;
+  }
+  .stage-gate {
+    background: #FFF2C1;
+    border-left: 3px solid #AC6500;
+    color: #5A4500;
+  }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .icon-spin { animation: spin 2s linear infinite; }
+  .icon-pulse { animation: pulse 1.2s ease-in-out infinite; }
+  .step { opacity: 0.3; transition: opacity 0.4s ease; }
+  .step.active { opacity: 1; color: #236CFF; }
+  .modal-backdrop { animation: fadeIn 0.15s ease; }
+  .modal-content { animation: slideUp 0.2s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23236CFF' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 26px !important;
+  }
+  select:focus { outline: none; }
+  ::placeholder { color: #7A8FA3; }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- ============ NAV ============ -->
+<nav class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-rule-soft">
+  <div class="max-w-6xl mx-auto px-7 h-16 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3 cursor-pointer flex-shrink-0" onclick="setView('home')">
+      <div class="text-2xl font-extrabold text-blueberry tracking-tight leading-none">MCA</div>
+      <div class="border-l border-rule pl-3">
+        <div class="lockup-name">Marketing Craft Academy</div>
+        <div class="text-[10px] font-semibold text-muted tracking-wide">Craft Development &amp; Capabilities</div>
+      </div>
+      <span class="text-[10px] font-bold text-white bg-super-blue px-2.5 py-1 rounded-full tracking-wider whitespace-nowrap">AI COACH</span>
+    </div>
+    <div class="flex items-center gap-0.5">
+      <button class="nav-tab active" data-tab="home"><i data-lucide="home" class="w-3.5 h-3.5"></i>Home</button>
+      <button class="nav-tab" data-tab="skills"><i data-lucide="award" class="w-3.5 h-3.5"></i>My Skills</button>
+      <button class="nav-tab" data-tab="events"><i data-lucide="calendar" class="w-3.5 h-3.5"></i>Events</button>
+      <button class="nav-tab" data-tab="wow"><i data-lucide="git-branch" class="w-3.5 h-3.5"></i>Ways of Working</button>
+      <button class="nav-tab" data-tab="genai"><i data-lucide="sparkles" class="w-3.5 h-3.5"></i>GenAI Hub</button>
+      <button class="nav-tab" data-tab="contact"><i data-lucide="mail" class="w-3.5 h-3.5"></i>Work With Us</button>
+      <button id="sso-button" class="ml-3 w-9 h-9 rounded-full bg-accent-light flex items-center justify-center hover:bg-agave-20 transition flex-shrink-0" title="Switch profile (mock SSO)">
+        <span class="text-sm font-bold text-super-blue" id="user-initials">AJ</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-6xl mx-auto px-7 py-10">
+
+  <!-- ============ HOME (AI search hero) ============ -->
+  <section id="view-home" class="view active">
+    <div class="max-w-2xl mx-auto pt-8">
+      <div class="text-center mb-10">
+        <h1 class="text-5xl font-extrabold tracking-tight leading-tight mb-4 text-blueberry">
+          What are you working on<br>
+          <span class="text-super-blue">today?</span>
+        </h1>
+        <p class="text-lg text-text-soft leading-relaxed max-w-xl mx-auto">
+          Bridge the Intuit Way and your daily workload. Describe a real challenge — the AI Coach surfaces exactly what you need.
+        </p>
+      </div>
+
+      <!-- Profile pill (testers only — would hide in production with real SSO) -->
+      <div class="flex justify-center mb-7">
+        <button id="profile-pill" class="group flex items-center gap-2 bg-white border border-rule rounded-full pl-3 pr-1.5 py-1.5 shadow-sm hover:border-super-blue transition">
+          <i data-lucide="circle-user" class="w-3.5 h-3.5 text-muted group-hover:text-super-blue transition"></i>
+          <span class="text-xs text-muted">You're testing as</span>
+          <span class="text-xs font-bold text-blueberry" id="profile-pill-context">M2/P4 PMM · Marketing</span>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-super-blue bg-accent-light rounded-full px-2.5 py-1 ml-1">Change</span>
+        </button>
+      </div>
+
+      <!-- Search -->
+      <form id="search-form" class="relative mb-12">
+        <div class="absolute left-5 top-1/2 -translate-y-1/2 pointer-events-none">
+          <i data-lucide="brain" class="w-5 h-5 text-super-blue"></i>
+        </div>
+        <input
+          type="text"
+          id="search-input"
+          placeholder="e.g., I'm sharpening positioning for my Q3 campaign…"
+          class="input-search w-full py-5 pl-14 pr-40 bg-white border-2 border-rule rounded-2xl text-base font-medium text-blueberry shadow-sm transition"
+        />
+        <button
+          type="submit"
+          id="search-submit"
+          class="absolute right-2 top-1/2 -translate-y-1/2 bg-rule-soft text-muted px-5 py-3 rounded-xl text-sm font-bold flex items-center gap-2 transition"
+        >
+          Ask AI Coach
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </form>
+
+      <!-- Quick prompts -->
+      <div id="quick-prompts-wrap">
+        <p class="eyebrow text-center mb-4">Suggested for <span id="prompt-context">M2/P4 PMM · Marketing</span></p>
+        <div class="grid grid-cols-2 gap-2.5" id="quick-prompts"></div>
+
+        <!-- Browse by job family (tertiary nav, callback to old site's 4 faces) -->
+        <div class="mt-12">
+          <p class="eyebrow text-center mb-5">Or browse by job family</p>
+          <div class="grid grid-cols-4 gap-3" id="family-faces"></div>
+        </div>
+
+        <p class="text-center text-xs text-muted italic mt-12 max-w-md mx-auto leading-relaxed">"The right resource, for the right marketer, at the exact moment they need it."</p>
+      </div>
+    </div>
+
+    <!-- Chat / Results area (hidden until search runs) -->
+    <div id="chat-area" class="hidden max-w-3xl mx-auto pt-6">
+      <button onclick="resetHome()" class="text-super-blue text-sm font-bold flex items-center gap-1.5 mb-7 hover:gap-2.5 transition-all">
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> New query
+      </button>
+
+      <div class="flex gap-3.5 mb-8">
+        <div class="w-10 h-10 rounded-full bg-accent-light flex items-center justify-center flex-shrink-0">
+          <i data-lucide="user" class="w-4 h-4 text-super-blue"></i>
+        </div>
+        <div class="flex-1 bg-white border border-rule rounded-2xl rounded-tl-sm px-5 py-4">
+          <div class="eyebrow mb-1.5" id="chat-context">M2/P4 · PMM · Marketing</div>
+          <p class="text-base font-semibold leading-snug" id="chat-query">"..."</p>
+        </div>
+      </div>
+
+      <div id="ai-processing" class="hidden flex gap-3.5">
+        <div class="w-10 h-10 rounded-full bg-super-blue flex items-center justify-center flex-shrink-0">
+          <i data-lucide="sparkles" class="w-4 h-4 text-white icon-spin"></i>
+        </div>
+        <div class="flex-1 pt-1.5 space-y-3" id="processing-steps"></div>
+      </div>
+
+      <div id="ai-results" class="hidden flex gap-3.5">
+        <div class="w-10 h-10 rounded-full bg-super-blue flex items-center justify-center flex-shrink-0 shadow-md shadow-super-blue/30">
+          <i data-lucide="sparkles" class="w-4 h-4 text-white"></i>
+        </div>
+        <div class="flex-1">
+          <div class="bg-white border-2 border-super-blue/15 rounded-2xl p-6 mb-7">
+            <h2 class="text-xl font-extrabold mb-1.5">Your customized action plan is ready.</h2>
+            <p class="text-text-soft leading-relaxed" id="results-summary"></p>
+          </div>
+          <div id="results-categories"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MY SKILLS (DASHBOARD) ============ -->
+  <section id="view-skills" class="view">
+    <div class="eyebrow text-super-blue mb-3">My Craft Skills</div>
+    <h1 class="text-4xl font-extrabold tracking-tight text-blueberry mb-2">Welcome back, <span id="skills-name">Alex</span></h1>
+    <p class="text-text-soft mb-10">You are currently focused on <span class="text-super-blue font-bold" id="current-focus">QuickBooks GTM</span> and <span class="font-bold text-blueberry" id="gap-count">2</span> core skill gaps.</p>
+
+    <!-- 3-CARD TOP ROW -->
+    <div class="grid grid-cols-3 gap-4 mb-8">
+
+      <!-- SKILL HEALTH -->
+      <div class="bg-white border border-rule rounded-2xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <div class="eyebrow">Skill Health</div>
+          <i data-lucide="trending-up" class="w-4 h-4" style="color: #3BD85E;"></i>
+        </div>
+        <div id="skill-bars" class="space-y-4"></div>
+        <p class="text-[10px] text-muted mt-4 italic">Drag any bar to override.</p>
+      </div>
+
+      <!-- DAILY COACH TIP -->
+      <div class="bg-blueberry text-white rounded-2xl p-6 relative overflow-hidden">
+        <svg class="absolute -bottom-4 -right-4 w-32 h-32 opacity-20" viewBox="0 0 100 100" fill="none" stroke="white" stroke-width="2">
+          <path d="M 10 80 Q 30 30, 50 60 T 90 50" stroke-linecap="round"/>
+          <path d="M 10 60 Q 30 10, 50 40 T 90 30" stroke-linecap="round"/>
+        </svg>
+        <div class="relative">
+          <div class="eyebrow mb-3" style="color: #81F2FE;">Daily Coach Tip</div>
+          <p class="text-base font-bold leading-snug mb-4" id="coach-tip-text">Based on your upcoming PMM post-mortem, I've prepared a custom 'Execution Analysis' prompt for your strategy draft.</p>
+          <button onclick="setView('home')" class="bg-white text-blueberry text-xs font-bold px-3 py-1.5 rounded-md hover:bg-tofu transition">
+            Try now
+          </button>
+        </div>
+      </div>
+
+      <!-- UPCOMING BENCHMARKS -->
+      <div class="bg-white border border-rule rounded-2xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <div class="eyebrow">Upcoming Benchmarks</div>
+          <i data-lucide="target" class="w-4 h-4 text-super-blue"></i>
+        </div>
+        <div id="benchmarks-list" class="space-y-3"></div>
+      </div>
+
+    </div>
+
+    <!-- RECOMMENDED NEXT (smaller row, 2 cards) -->
+    <div class="mb-12">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <div class="eyebrow text-super-blue">Recommended next</div>
+          <p class="text-sm text-muted mt-1">Closest to closing your gaps — pulled from approved learning partners.</p>
+        </div>
+        <button onclick="setView('home')" class="text-sm font-bold text-super-blue flex items-center gap-1 hover:gap-2 transition-all">
+          Ask AI Coach for more <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+      <div class="grid grid-cols-2 gap-4" id="recommended-next"></div>
+    </div>
+
+    <!-- ============ CHOOSE YOUR FOCUS SKILLS (navy panel) ============ -->
+    <div class="bg-blueberry rounded-2xl p-8 mb-12 relative overflow-hidden">
+      <!-- decorative gradient corner -->
+      <div class="absolute top-0 right-0 w-72 h-72 bg-super-blue opacity-10 rounded-full -translate-y-1/3 translate-x-1/4"></div>
+
+      <div class="relative">
+        <div class="flex items-baseline justify-between mb-1">
+          <div class="eyebrow" style="color: #81F2FE;">Choose your focus</div>
+          <button id="reset-focus" class="text-[11px] font-bold text-white/60 hover:text-white transition uppercase tracking-wider">Reset</button>
+        </div>
+        <h2 class="text-2xl font-extrabold text-white mb-2 tracking-tight">Commit to a goal level on each craft skill</h2>
+        <p class="text-white/70 text-sm mb-6 max-w-2xl">Pick where you want each skill to land this cycle. Your selections personalize the Daily Coach Tip above and shape what AI Coach recommends next.</p>
+
+        <!-- family filter tabs -->
+        <div class="flex flex-wrap gap-1.5 mb-6 border-b border-white/15 pb-1" id="focus-family-tabs"></div>
+
+        <!-- skill rows -->
+        <div class="space-y-2.5" id="focus-skill-rows"></div>
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="border-t border-rule-soft pt-12 mb-10">
+      <div class="eyebrow text-super-blue mb-3">Reference · The Four Craft Pillars</div>
+      <h2 class="text-2xl font-extrabold tracking-tight text-blueberry mb-2">What excellence looks like at your level</h2>
+      <p class="text-text-soft mb-8"><span id="skills-context">M2/P4 · PMM · Marketing</span> · Synced from Workday SSO · FY26 Rubric</p>
+    </div>
+
+    <!-- JOB FAMILY + LEVEL SELECTORS -->
+    <div class="mb-6">
+      <label class="eyebrow mb-3 block">Job Family <span class="text-super-blue ml-2 normal-case font-medium tracking-normal">Auto-set from Workday SSO</span></label>
+      <div class="flex flex-wrap gap-2" id="job-family-selector"></div>
+    </div>
+
+    <div class="mb-10">
+      <label class="eyebrow mb-3 block">P-Level</label>
+      <div class="flex gap-2 flex-wrap" id="level-selector"></div>
+    </div>
+
+    <!-- 4 PILLARS REFERENCE CARDS -->
+    <div class="grid grid-cols-2 gap-5" id="pillars-grid"></div>
+  </section>
+
+  <!-- ============ EVENTS ============ -->
+  <section id="view-events" class="view">
+    <div class="eyebrow text-super-blue mb-3">Events</div>
+    <h1 class="text-4xl font-extrabold tracking-tight text-blueberry mb-3">Live Learning Events &amp; Workshops</h1>
+    <p class="text-text-soft mb-8">Sourced from Swoogo · Personalized for your role</p>
+
+    <!-- MASTER SUBSCRIBE STRIP -->
+    <div class="bg-blueberry text-white rounded-2xl p-6 mb-8 flex items-center justify-between gap-6 relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-40 h-40 bg-super-blue opacity-15 rounded-full -translate-y-1/2 translate-x-1/4"></div>
+      <div class="relative flex-1">
+        <div class="eyebrow mb-2" style="color: #81F2FE;">Stay in the loop</div>
+        <h3 class="text-xl font-bold mb-1">Subscribe to events relevant to <span id="sub-role-context">your role</span></h3>
+        <p class="text-sm text-white/70 max-w-lg">We'll email you only the events that match your job family and level. No noise, no spam.</p>
+      </div>
+      <button id="master-subscribe" class="relative bg-white text-blueberry text-sm font-bold px-5 py-2.5 rounded-lg hover:bg-tofu transition flex items-center gap-2 flex-shrink-0">
+        <i data-lucide="bell" class="w-4 h-4"></i>
+        <span id="master-subscribe-label">Subscribe</span>
+      </button>
+    </div>
+
+    <!-- LEGEND + VIEW TOGGLE + MONTH NAV -->
+    <div class="flex items-center justify-between mb-6 flex-wrap gap-4">
+      <div class="flex items-center gap-3 flex-wrap">
+        <span class="eyebrow">Provider:</span>
+        <span class="flex items-center gap-1.5 text-xs font-semibold text-text-soft"><span class="w-2.5 h-2.5 rounded-full" style="background: #236CFF;"></span>Intuit</span>
+        <span class="flex items-center gap-1.5 text-xs font-semibold text-text-soft"><span class="w-2.5 h-2.5 rounded-full" style="background: #0A66C2;"></span>LinkedIn</span>
+        <span class="flex items-center gap-1.5 text-xs font-semibold text-text-soft"><span class="w-2.5 h-2.5 rounded-full" style="background: #3BD85E;"></span>ANA</span>
+        <span class="flex items-center gap-1.5 text-xs font-semibold text-text-soft"><span class="w-2.5 h-2.5 rounded-full" style="background: #FF5C37;"></span>MMA</span>
+        <span class="flex items-center gap-1.5 text-xs font-semibold text-text-soft"><span class="w-2.5 h-2.5 rounded-full" style="background: #000000;"></span>Reforge</span>
+      </div>
+      <div class="flex items-center gap-3 flex-wrap">
+        <!-- Provider filter -->
+        <div class="flex items-center gap-2">
+          <label class="eyebrow text-[10px]" for="provider-filter">Show:</label>
+          <select id="provider-filter" class="bg-white border border-rule rounded-lg text-xs font-bold text-blueberry h-8 px-3 cursor-pointer">
+            <option value="All">All providers</option>
+            <option value="Intuit">Intuit only</option>
+            <option value="LinkedIn">LinkedIn</option>
+            <option value="ANA">ANA</option>
+            <option value="MMA">MMA</option>
+            <option value="Reforge">Reforge</option>
+          </select>
+        </div>
+        <!-- View toggle -->
+        <div class="flex items-center bg-white border border-rule rounded-lg p-0.5">
+          <button id="view-calendar" class="view-toggle-btn px-3 h-8 text-xs font-bold rounded-md transition flex items-center gap-1.5 bg-super-blue text-white" data-events-view="calendar">
+            <i data-lucide="calendar-days" class="w-3.5 h-3.5"></i> Calendar
+          </button>
+          <button id="view-agenda" class="view-toggle-btn px-3 h-8 text-xs font-bold rounded-md transition flex items-center gap-1.5 text-muted hover:text-blueberry" data-events-view="agenda">
+            <i data-lucide="list" class="w-3.5 h-3.5"></i> Agenda
+          </button>
+        </div>
+        <!-- Month nav -->
+        <div class="flex items-center gap-1.5">
+          <button id="month-prev" class="w-9 h-9 rounded-lg border border-rule bg-white hover:bg-wintermint hover:border-super-blue transition flex items-center justify-center">
+            <i data-lucide="chevron-left" class="w-4 h-4 text-blueberry"></i>
+          </button>
+          <button id="month-today" class="text-xs font-bold text-super-blue px-3 h-9 rounded-lg border border-rule bg-white hover:bg-wintermint hover:border-super-blue transition">Today</button>
+          <button id="month-next" class="w-9 h-9 rounded-lg border border-rule bg-white hover:bg-wintermint hover:border-super-blue transition flex items-center justify-center">
+            <i data-lucide="chevron-right" class="w-4 h-4 text-blueberry"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CALENDAR GRID + SIDE DETAIL PANEL -->
+    <div id="calendar-view" class="lg:grid lg:gap-4 space-y-4 lg:space-y-0" style="grid-template-columns: 1fr 280px;">
+      <div id="calendar-grid" class="min-w-0"></div>
+      <div id="calendar-detail-panel" class="bg-white border border-rule rounded-2xl p-5 self-start lg:sticky lg:top-24"></div>
+    </div>
+
+    <!-- AGENDA (hidden by default; toggle shows) -->
+    <div id="agenda-container" class="hidden"></div>
+
+    <!-- PAST EVENTS (collapsed disclosure) -->
+    <details class="mt-12 group">
+      <summary class="cursor-pointer flex items-center gap-2 text-sm font-bold text-muted hover:text-blueberry transition">
+        <i data-lucide="chevron-right" class="w-4 h-4 group-open:rotate-90 transition"></i>
+        View past events
+      </summary>
+      <div id="past-events-list" class="mt-4"></div>
+    </details>
+  </section>
+
+  <!-- ============ WAYS OF WORKING ============ -->
+  <section id="view-wow" class="view">
+    <div class="eyebrow text-super-blue mb-3">Ways of Working</div>
+    <h1 class="text-4xl font-extrabold tracking-tight text-blueberry mb-4">How M&amp;C teams orchestrate end-to-end GTM</h1>
+    <p class="text-lg text-text-soft mb-3 leading-relaxed">"While the GTM blueprint defines what needs to be done, Ways of Working specifies <span class="font-bold text-blueberry">how each job gets done, by whom, when, and with what tools and interactions.</span>"</p>
+    <p class="text-sm text-muted mb-12">Source of truth: WoW deck (Platform &amp; GBSG M&amp;Cs) · Last updated 11/19</p>
+
+    <div class="grid grid-cols-2 gap-5 mb-14">
+      <div class="bg-white border border-rule rounded-2xl p-7">
+        <div class="eyebrow mb-3">From · Current State</div>
+        <p class="text-lg font-light leading-snug text-blueberry">"I don't know where to start — there's a course, a rubric, and some AI tool, and I'm not sure which one is for me."</p>
+      </div>
+      <div class="bg-blueberry text-white rounded-2xl p-7 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-40 h-40 bg-super-blue opacity-15 rounded-full -translate-y-1/3 translate-x-1/3"></div>
+        <div class="relative">
+          <div class="eyebrow mb-3" style="color: #81F2FE;">To · Desired State</div>
+          <p class="text-lg font-light leading-snug">"I described what I'm working on and the Academy showed me exactly what to do next — no searching, no guessing."</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="text-2xl font-extrabold text-blueberry mb-2">The phase-by-phase blueprint</h2>
+    <p class="text-muted text-sm mb-2">Slide 5 (Proposed) · 9 sub-phases · Each phase shows DACE, deliverables, and stage gate.</p>
+    <p class="text-xs text-super-blue mb-6 font-bold">→ Phases where <span id="wow-user-role">your role</span> appears in DACE are highlighted.</p>
+
+    <div class="bg-white border border-rule rounded-2xl overflow-hidden mb-14" id="phases-table"></div>
+
+    <div class="border-t border-rule-soft pt-12 mb-14">
+      <div class="eyebrow text-super-blue mb-3">Creative Operating Model</div>
+      <h2 class="text-2xl font-extrabold text-blueberry mb-3">Three creative pillar teams, one operating system</h2>
+      <p class="text-text-soft mb-8 max-w-3xl">The system is under sustained strain. Volume and complexity have outpaced structural evolution.</p>
+
+      <div class="grid grid-cols-3 gap-4 mb-10">
+        <div class="bg-white border border-rule rounded-2xl p-5 card-hover">
+          <div class="eyebrow text-super-blue mb-3">BAM · Visual &amp; Content</div>
+          <h3 class="text-lg font-bold text-blueberry mb-2 leading-snug">Platform Marketing — Intuition</h3>
+          <p class="text-sm text-text-soft mb-4 leading-relaxed">Brand campaigns, paid media, lifecycle, marketing IPDs, campaign landing pages.</p>
+          <div class="text-xs text-muted pt-3 border-t border-rule-soft"><span class="font-bold text-blueberry">POC</span> · Jaclyn Stiller / Brinda Khanna</div>
+        </div>
+        <div class="bg-white border border-rule rounded-2xl p-5 card-hover">
+          <div class="eyebrow text-super-blue mb-3">Transformation · Design</div>
+          <h3 class="text-lg font-bold text-blueberry mb-2 leading-snug">Web architecture &amp; design systems</h3>
+          <p class="text-sm text-text-soft mb-4 leading-relaxed">Web front-doors, onboarding flows, reusable page systems, UX-driven journeys.</p>
+          <div class="text-xs text-muted pt-3 border-t border-rule-soft"><span class="font-bold text-blueberry">POC</span> · Lisa Wells / Marc Lassoff / Linda Hoecker</div>
+        </div>
+        <div class="bg-white border border-rule rounded-2xl p-5 card-hover">
+          <div class="eyebrow text-super-blue mb-3">Transformation · Comms</div>
+          <h3 class="text-lg font-bold text-blueberry mb-2 leading-snug">Storytelling &amp; enterprise narrative</h3>
+          <p class="text-sm text-text-soft mb-4 leading-relaxed">Executive comms, flagship events, enterprise storytelling, strategic initiatives.</p>
+          <div class="text-xs text-muted pt-3 border-t border-rule-soft"><span class="font-bold text-blueberry">POC</span> · Ryan Zurowski</div>
+        </div>
+      </div>
+
+      <h3 class="text-lg font-bold text-blueberry mb-4">Seven consolidated themes shaping the strain</h3>
+      <ol class="grid grid-cols-2 gap-x-8 gap-y-2 text-sm mb-12 list-decimal list-inside marker:text-super-blue marker:font-bold">
+        <li class="text-blueberry">Internal workload growth has outpaced operating model evolution</li>
+        <li class="text-blueberry">Structural misalignment creates ownership ambiguity</li>
+        <li class="text-blueberry">Governance is fragmented across guidelines and intake</li>
+        <li class="text-blueberry">Squad rigidity reduces system flexibility</li>
+        <li class="text-blueberry">No single cross-marketing trade-off authority</li>
+        <li class="text-blueberry">Hidden operational load reduces effective capacity</li>
+        <li class="text-blueberry">Escalations and reactive prioritization have become normalized</li>
+      </ol>
+
+      <h3 class="text-lg font-bold text-blueberry mb-4">Three critical decision points</h3>
+      <div class="space-y-2">
+        <div class="bg-white border border-rule rounded-xl p-5 flex items-start gap-5">
+          <div class="text-3xl font-light text-super-blue leading-none">1</div>
+          <div>
+            <div class="font-bold text-blueberry mb-1">Governance &amp; Standards Consolidation</div>
+            <div class="text-sm text-text-soft">Centralize ownership of creative standards and intake for all creative work.</div>
+          </div>
+        </div>
+        <div class="bg-white border border-rule rounded-xl p-5 flex items-start gap-5">
+          <div class="text-3xl font-light text-super-blue leading-none">2</div>
+          <div>
+            <div class="font-bold text-blueberry mb-1">Capacity Management &amp; Workload Elasticity</div>
+            <div class="text-sm text-text-soft">Redefine the allocation model to increase flexibility and ring-fence strategic capacity.</div>
+          </div>
+        </div>
+        <div class="bg-white border border-rule rounded-xl p-5 flex items-start gap-5">
+          <div class="text-3xl font-light text-super-blue leading-none">3</div>
+          <div>
+            <div class="font-bold text-blueberry mb-1">Clear Ownership &amp; Escalation Authority</div>
+            <div class="text-sm text-text-soft">Establish a clear escalation pathway and singular decision-maker for cross-functional creative trade-offs.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-rule-soft pt-12 mb-14">
+      <div class="eyebrow text-super-blue mb-3">Decision Spaces</div>
+      <h2 class="text-2xl font-extrabold text-blueberry mb-3">1-way doors vs 2-way doors</h2>
+      <p class="text-text-soft mb-6 max-w-3xl">Use the GTM Decision Matrix to clarify, document, and track every key decision. Source of truth lives outside the Academy; we link out.</p>
+      <div class="grid grid-cols-2 gap-5">
+        <a href="#" class="card-hover bg-white border border-rule rounded-2xl p-6 block">
+          <div class="eyebrow text-super-blue mb-3">Template</div>
+          <h3 class="text-lg font-bold text-blueberry mb-2">GTM Decision Matrix</h3>
+          <p class="text-sm text-text-soft mb-4">Phase · Discrete decision · Decision Space · DACE · Rationale · Decision type · SLA</p>
+          <div class="text-sm font-bold text-super-blue">Open template →</div>
+        </a>
+        <a href="#" class="card-hover bg-white border border-rule rounded-2xl p-6 block">
+          <div class="eyebrow text-super-blue mb-3">AI Assistant</div>
+          <h3 class="text-lg font-bold text-blueberry mb-2">WoW Decisions GPT</h3>
+          <p class="text-sm text-text-soft mb-4">Your clarity coach. Provides alternative solutions, empowers approvers to move with velocity.</p>
+          <div class="text-sm font-bold text-super-blue">Open assistant →</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="border-t border-rule-soft pt-12">
+      <div class="eyebrow text-super-blue mb-3">Top Tier Brand Initiative Review</div>
+      <h2 class="text-2xl font-extrabold text-blueberry mb-3">POAP — decision lifecycle</h2>
+      <p class="text-text-soft mb-8 max-w-3xl">Complementary to the broader GTM blueprint. Drives clear DACE across Brand work without changing upstream or downstream ownership.</p>
+      <div class="grid grid-cols-4 gap-3">
+        <div class="bg-white border border-rule rounded-xl p-5 card-hover">
+          <i data-lucide="file-text" class="w-6 h-6 text-super-blue mb-3"></i>
+          <div class="font-bold text-blueberry mb-1">Marketing Brief</div>
+          <p class="text-xs text-text-soft mb-4 leading-relaxed">Strategic review &amp; leadership alignment prior to kickoff.</p>
+          <div class="text-xs text-muted leading-relaxed pt-3 border-t border-rule-soft"><b class="text-blueberry">D:</b> Tam<br><b class="text-blueberry">A:</b> Thomas<br><b class="text-blueberry">C:</b> Lionel, PMM<br><b class="text-blueberry">E:</b> Greg</div>
+        </div>
+        <div class="bg-white border border-rule rounded-xl p-5 card-hover">
+          <i data-lucide="pen-tool" class="w-6 h-6 text-super-blue mb-3"></i>
+          <div class="font-bold text-blueberry mb-1">Creative Brief</div>
+          <p class="text-xs text-text-soft mb-4 leading-relaxed">Re-frame the problem from customer's POV to inspire creative.</p>
+          <div class="text-xs text-muted leading-relaxed pt-3 border-t border-rule-soft"><b class="text-blueberry">D:</b> Lionel<br><b class="text-blueberry">A:</b> Thomas<br><b class="text-blueberry">C:</b> Tam<br><b class="text-blueberry">E:</b> Greg</div>
+        </div>
+        <div class="bg-white border border-rule rounded-xl p-5 card-hover">
+          <i data-lucide="lightbulb" class="w-6 h-6 text-super-blue mb-3"></i>
+          <div class="font-bold text-blueberry mb-1">Creative Concept</div>
+          <p class="text-xs text-text-soft mb-4 leading-relaxed">Unifying creative platform · R1, R2, R3 review cycle.</p>
+          <div class="text-xs text-muted leading-relaxed pt-3 border-t border-rule-soft"><b class="text-blueberry">D:</b> Lionel<br><b class="text-blueberry">A:</b> Thomas (w/ Greg)<br><b class="text-blueberry">C:</b> Tam<br><b class="text-blueberry">E:</b> Greg</div>
+        </div>
+        <div class="bg-white border border-rule rounded-xl p-5 card-hover">
+          <i data-lucide="rocket" class="w-6 h-6 text-super-blue mb-3"></i>
+          <div class="font-bold text-blueberry mb-1">Integrated GTM Plan</div>
+          <p class="text-xs text-text-soft mb-4 leading-relaxed">E2E plan with execution details for each marketing channel.</p>
+          <div class="text-xs text-muted leading-relaxed pt-3 border-t border-rule-soft"><b class="text-blueberry">D:</b> Tam<br><b class="text-blueberry">A:</b> Thomas<br><b class="text-blueberry">C:</b> Lionel, Channel VP<br><b class="text-blueberry">E:</b> Greg</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GENAI HUB ============ -->
+  <section id="view-genai" class="view">
+    <div class="eyebrow text-super-blue mb-3">GenAI Hub</div>
+    <h1 class="text-4xl font-extrabold tracking-tight text-blueberry mb-3">Work smarter with AI</h1>
+    <p class="text-text-soft mb-10">Approved tools · Claude Skills · Access &amp; training</p>
+
+    <div class="bg-blueberry text-white rounded-2xl p-8 mb-10 relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-72 h-72 bg-super-blue opacity-15 rounded-full -translate-y-1/3 translate-x-1/4"></div>
+      <div class="absolute bottom-0 right-20 w-40 h-40 opacity-10 rounded-full translate-y-1/2" style="background: #81F2FE;"></div>
+      <div class="flex items-center justify-between relative gap-6">
+        <div class="max-w-xl">
+          <div class="eyebrow mb-3" style="color: #81F2FE;">Work smarter with AI</div>
+          <h2 class="text-2xl font-light mb-3 leading-snug">Your marketing toolkit just got a major upgrade</h2>
+          <p class="text-white/70 text-sm leading-relaxed">Claude Skills are AI-powered tools built specifically for Intuit marketers — designed to eliminate the manual, repetitive work that slows you down.</p>
+          <div class="flex gap-3 mt-6">
+            <button class="bg-white text-blueberry text-sm font-bold px-5 py-2.5 rounded-lg hover:bg-tofu transition">Get Access →</button>
+            <button class="border border-white/30 text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:bg-white/10 transition">View All Tools</button>
+          </div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5 max-w-xs flex-shrink-0">
+          <div class="eyebrow mb-2" style="color: #81F2FE;">Latest GenAI Digest</div>
+          <div class="font-bold mb-1 text-white">The Monthly GenAI Source</div>
+          <p class="text-xs text-white/60 leading-relaxed">Latest in GenAI from inside and outside Intuit for marketing &amp; comms.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage-gate rounded-lg p-4 mb-12 text-sm">
+      ⚠️ <b>Access required:</b> Employees must complete <b>GenAI Tools for Your Workforce training</b> prior to accessing Intuit-approved GenAI tools. <a href="#" class="font-bold underline">Complete training →</a>
+    </div>
+
+    <h2 class="text-xl font-extrabold text-blueberry mb-4">Claude Skills — available now</h2>
+    <div class="grid grid-cols-3 gap-4 mb-12" id="claude-skills"></div>
+
+    <h2 class="text-xl font-extrabold text-blueberry mb-4">Approved GenAI tools</h2>
+    <div class="grid grid-cols-2 gap-4">
+      <div class="bg-white border border-rule rounded-2xl p-5 card-hover">
+        <i data-lucide="sparkles" class="w-6 h-6 text-cat-agent mb-3"></i>
+        <div class="font-bold text-blueberry mb-1">Claude Chat + Cowork</div>
+        <p class="text-sm text-text-soft mb-4 leading-relaxed">Writing, brainstorming, building workflows and tools with Claude for marketing tasks.</p>
+        <a href="#" class="text-sm font-bold text-super-blue">Getting Started with Claude →</a>
+      </div>
+      <div class="bg-white border border-rule rounded-2xl p-5 card-hover">
+        <i data-lucide="message-square" class="w-6 h-6 text-cat-playbook mb-3"></i>
+        <div class="font-bold text-blueberry mb-1">ChatGPT</div>
+        <p class="text-sm text-text-soft mb-4 leading-relaxed">Generative AI tasks, analysis, specialized workflows — fit for advanced analysis.</p>
+        <a href="#" class="text-sm font-bold text-super-blue">Getting Started with ChatGPT →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WORK WITH US ============ -->
+  <section id="view-contact" class="view max-w-3xl">
+    <div class="eyebrow text-super-blue mb-3">Work With Us</div>
+    <h1 class="text-4xl font-extrabold tracking-tight text-blueberry mb-3">Bring us in</h1>
+    <p class="text-lg text-text-soft mb-10">We design and facilitate learning experiences for M&amp;C teams — AI fluency, compelling communications, leadership presence, and more.</p>
+
+    <!-- PATH SELECTOR -->
+    <div class="grid grid-cols-2 gap-4 mb-8">
+      <button class="path-btn bg-white border-2 border-rule rounded-2xl p-6 text-left transition" data-path="individual">
+        <div class="w-10 h-10 rounded-xl bg-accent-light flex items-center justify-center mb-3">
+          <i data-lucide="user" class="w-5 h-5 text-super-blue"></i>
+        </div>
+        <div class="text-base font-extrabold text-blueberry mb-1">I'm an individual marketer</div>
+        <p class="text-sm text-text-soft leading-relaxed">I have a personal development goal or want to attend an upcoming program.</p>
+      </button>
+      <button class="path-btn bg-white border-2 border-rule rounded-2xl p-6 text-left transition" data-path="manager">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background: #FFF2C1;">
+          <i data-lucide="users" class="w-5 h-5" style="color: #AC6500;"></i>
+        </div>
+        <div class="text-base font-extrabold text-blueberry mb-1">I'm a manager / director</div>
+        <p class="text-sm text-text-soft leading-relaxed">I want to level up my team — workshop, offsite, or custom training.</p>
+      </button>
+    </div>
+
+    <!-- FORM -->
+    <form id="lle-form" class="bg-white border border-rule rounded-2xl p-7">
+      <div class="mb-6 pb-5 border-b border-rule-soft">
+        <div class="eyebrow text-super-blue mb-2">Learning Experience Request · <span id="form-path-label">Individual</span></div>
+        <h2 class="text-xl font-extrabold text-blueberry">Tell us about your need</h2>
+        <p class="text-sm text-text-soft mt-1">All requests are reviewed by the M&amp;C Craft Development &amp; Capabilities team.</p>
+      </div>
+
+      <!-- Submitter -->
+      <div class="grid grid-cols-2 gap-4 mb-5">
+        <div>
+          <label class="text-xs font-bold text-blueberry mb-1.5 block">Your name <span class="text-tomato">*</span></label>
+          <input type="text" name="name" required class="w-full px-3 py-2 border border-rule rounded-lg text-sm focus:border-super-blue focus:outline-none focus:ring-2 focus:ring-super-blue/20" placeholder="First &amp; last name">
+        </div>
+        <div>
+          <label class="text-xs font-bold text-blueberry mb-1.5 block">Email <span class="text-tomato">*</span></label>
+          <input type="email" name="email" required class="w-full px-3 py-2 border border-rule rounded-lg text-sm focus:border-super-blue focus:outline-none focus:ring-2 focus:ring-super-blue/20" placeholder="you@intuit.com">
+        </div>
+      </div>
+
+      <!-- What kind of experience -->
+      <div class="mb-5">
+        <label class="text-xs font-bold text-blueberry mb-2 block">What kind of learning experience? <span class="text-tomato">*</span></label>
+        <div class="grid grid-cols-2 gap-2">
+          <label class="exp-chip flex items-center gap-2 px-3 py-2 border border-rule rounded-lg cursor-pointer hover:border-super-blue transition">
+            <input type="checkbox" name="experience" value="Impactful Business Communications" class="accent-super-blue">
+            <span class="text-sm">Impactful Business Communications</span>
+          </label>
+          <label class="exp-chip flex items-center gap-2 px-3 py-2 border border-rule rounded-lg cursor-pointer hover:border-super-blue transition">
+            <input type="checkbox" name="experience" value="Storytelling &amp; Verbal Communication" class="accent-super-blue">
+            <span class="text-sm">Storytelling &amp; Verbal Communication</span>
+          </label>
+          <label class="exp-chip flex items-center gap-2 px-3 py-2 border border-rule rounded-lg cursor-pointer hover:border-super-blue transition">
+            <input type="checkbox" name="experience" value="Strategic Thinking" class="accent-super-blue">
+            <span class="text-sm">Strategic Thinking</span>
+          </label>
+          <label class="exp-chip flex items-center gap-2 px-3 py-2 border border-rule rounded-lg cursor-pointer hover:border-super-blue transition">
+            <input type="checkbox" name="experience" value="GenAI" class="accent-super-blue">
+            <span class="text-sm">GenAI</span>
+          </label>
+          <label class="exp-chip flex items-center gap-2 px-3 py-2 border border-rule rounded-lg cursor-pointer hover:border-super-blue transition">
+            <input type="checkbox" name="experience" value="D4D for Marketing &amp; Communications" class="accent-super-blue">
+            <span class="text-sm">D4D for M&amp;C</span>
+          </label>
+          <label class="exp-chip flex items-center gap-2 px-3 py-2 border border-rule rounded-lg cursor-pointer hover:border-super-blue transition">
+            <input type="checkbox" name="experience" value="Customer-driven Experimentation" class="accent-super-blue">
+            <span class="text-sm">Customer-driven Experimentation</span>
+          </label>
+          <label class="exp-chip flex items-center gap-2 px-3 py-2 border border-rule rounded-lg cursor-pointer hover:border-super-blue transition manager-only">
+            <input type="checkbox" name="experience" value="Team Offsite — topic TBD" class="accent-super-blue">
+            <span class="text-sm">Team Offsite — topic TBD</span>
+          </label>
+          <label class="exp-chip flex items-center gap-2 px-3 py-2 border border-rule rounded-lg cursor-pointer hover:border-super-blue transition">
+            <input type="checkbox" name="experience" value="Other" class="accent-super-blue">
+            <span class="text-sm">Other</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Pain point -->
+      <div class="mb-5">
+        <label class="text-xs font-bold text-blueberry mb-1.5 block">Describe your request, pain point, or problem <span class="text-tomato">*</span></label>
+        <textarea name="pain_point" required rows="3" class="w-full px-3 py-2 border border-rule rounded-lg text-sm focus:border-super-blue focus:outline-none focus:ring-2 focus:ring-super-blue/20" placeholder="What are you trying to solve?"></textarea>
+      </div>
+
+      <!-- Why important -->
+      <div class="mb-5">
+        <label class="text-xs font-bold text-blueberry mb-1.5 block">Help us understand. What exactly are you looking for, and why is it important?</label>
+        <textarea name="why_important" rows="3" class="w-full px-3 py-2 border border-rule rounded-lg text-sm focus:border-super-blue focus:outline-none focus:ring-2 focus:ring-super-blue/20" placeholder="Outcome you're hoping for, business context, anything else we should know."></textarea>
+      </div>
+
+      <!-- MANAGER-ONLY: audience + budget -->
+      <div class="manager-only-block hidden">
+        <div class="mb-5">
+          <label class="text-xs font-bold text-blueberry mb-1.5 block">Audience (team size, job family, level)</label>
+          <input type="text" name="audience" class="w-full px-3 py-2 border border-rule rounded-lg text-sm focus:border-super-blue focus:outline-none focus:ring-2 focus:ring-super-blue/20" placeholder="e.g. 12 PMMs, mostly M2/P4 and M3/P5">
+        </div>
+        <div class="mb-5">
+          <label class="text-xs font-bold text-blueberry mb-1.5 block">Do you have budget?</label>
+          <select name="budget" class="w-full px-3 py-2 border border-rule rounded-lg text-sm focus:border-super-blue focus:outline-none focus:ring-2 focus:ring-super-blue/20 bg-white">
+            <option value="">Select…</option>
+            <option>Yes — fully funded</option>
+            <option>Partial — need help scoping</option>
+            <option>No — need to make the case</option>
+            <option>Not sure</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Timing -->
+      <div class="border-t border-rule-soft pt-5 mb-5">
+        <div class="eyebrow text-super-blue mb-3">Timing</div>
+        <div class="mb-4">
+          <label class="text-xs font-bold text-blueberry mb-1.5 block">Priority of this request <span class="text-tomato">*</span></label>
+          <select name="priority" required class="w-full px-3 py-2 border border-rule rounded-lg text-sm focus:border-super-blue focus:outline-none focus:ring-2 focus:ring-super-blue/20 bg-white">
+            <option value="">Select…</option>
+            <option>P0 — urgent, blocking</option>
+            <option>P1 — needed within the quarter</option>
+            <option>P2 — exploring, no firm date</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="text-xs font-bold text-blueberry mb-1.5 block">Target start date</label>
+            <input type="date" name="start_date" class="w-full px-3 py-2 border border-rule rounded-lg text-sm focus:border-super-blue focus:outline-none focus:ring-2 focus:ring-super-blue/20">
+          </div>
+          <div>
+            <label class="text-xs font-bold text-blueberry mb-1.5 block">Target end date</label>
+            <input type="date" name="end_date" class="w-full px-3 py-2 border border-rule rounded-lg text-sm focus:border-super-blue focus:outline-none focus:ring-2 focus:ring-super-blue/20">
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="flex items-center justify-between pt-4 border-t border-rule-soft">
+        <p class="text-xs text-muted">All requests are prioritized &amp; followed up by the M&amp;C Craft Development &amp; Capabilities team.</p>
+        <button type="submit" id="form-submit" class="bg-super-blue hover:bg-super-blue-dark text-white text-sm font-bold px-6 py-2.5 rounded-lg transition flex items-center gap-2 flex-shrink-0">
+          Submit Request
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </form>
+
+    <!-- Success state -->
+    <div id="form-success" class="hidden bg-white border-2 border-kiwi/30 rounded-2xl p-8 text-center">
+      <div class="w-14 h-14 rounded-full bg-kiwi/15 flex items-center justify-center mx-auto mb-4">
+        <i data-lucide="check" class="w-7 h-7" style="color: #3BD85E;"></i>
+      </div>
+      <h3 class="text-2xl font-extrabold text-blueberry mb-2">Request submitted</h3>
+      <p class="text-text-soft mb-5">The M&amp;C Craft Development &amp; Capabilities team will follow up within 3 business days.</p>
+      <button onclick="resetForm()" class="text-sm font-bold text-super-blue">Submit another request →</button>
+    </div>
+
+    <p class="text-xs text-muted text-center mt-8">
+      Questions? Reach the team at <a href="mailto:MarketingL&D@intuit.com" class="text-super-blue font-bold">MarketingL&amp;D@intuit.com</a>
+    </p>
+  </section>
+
+</main>
+
+<!-- ============ SSO MOCK MODAL ============ -->
+<div id="sso-modal" class="fixed inset-0 bg-blueberry/40 z-[100] hidden items-center justify-center modal-backdrop">
+  <div class="bg-white rounded-2xl shadow-2xl p-7 w-[420px] modal-content">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <div class="eyebrow text-super-blue mb-1">Mocked Workday SSO</div>
+        <h3 class="text-xl font-extrabold">Switch role for testing</h3>
+      </div>
+      <button id="sso-close" class="text-muted hover:text-blueberry text-2xl leading-none">×</button>
+    </div>
+    <p class="text-sm text-text-soft mb-5 leading-relaxed">In production this is auto-pulled from Workday. For MVP testing, change role/level to validate that the AI Coach personalizes recommendations correctly.</p>
+
+    <label class="eyebrow mb-2 block">Name</label>
+    <input id="input-name" class="w-full mb-4 px-3 py-2 border border-rule rounded-lg text-sm" type="text" />
+
+    <div class="grid grid-cols-3 gap-3 mb-5">
+      <div>
+        <label class="eyebrow mb-2 block">Family</label>
+        <select id="input-family" class="w-full px-2 py-2 border border-rule rounded-lg text-sm bg-white">
+          <option>Marketing</option>
+          <option>Marketing Ops</option>
+          <option>Market Research</option>
+          <option>Communications</option>
+        </select>
+      </div>
+      <div>
+        <label class="eyebrow mb-2 block">Role</label>
+        <select id="input-role" class="w-full px-2 py-2 border border-rule rounded-lg text-sm bg-white">
+          <option>PMM</option><option>Lifecycle</option><option>Performance</option>
+          <option>Brand</option><option>Research</option><option>Communications</option>
+          <option>SEO/Content</option><option>GTM</option><option>Creative</option><option>Editorial</option>
+        </select>
+      </div>
+      <div>
+        <label class="eyebrow mb-2 block">Level</label>
+        <select id="input-level" class="w-full px-2 py-2 border border-rule rounded-lg text-sm bg-white">
+          <option>P2</option><option>M1/P3</option><option selected>M2/P4</option>
+          <option>M3/P5</option><option>M4/P6</option><option>M6</option>
+        </select>
+      </div>
+    </div>
+
+    <button id="sso-apply" class="w-full bg-super-blue hover:bg-super-blue-dark text-white font-bold py-3 rounded-lg transition">Apply</button>
+  </div>
+</div>
+
+<script>
+// ============ STATE ============
+const STATE = {
+  user: { name: 'Alex Johnson', family: 'Marketing', role: 'PMM', level: 'M2/P4' },
+  tab: 'home',
+  currentLevel: 'M2/P4',
+};
+
+// ============ DATA ============
+const JOB_FAMILIES = ['Marketing', 'Marketing Ops', 'Market Research', 'Communications'];
+const P_LEVELS = ['P2', 'M1/P3', 'M2/P4', 'M3/P5', 'M4/P6', 'M6'];
+const LEVEL_TITLES = {
+  'P2': 'Senior IC',
+  'M1/P3': 'Senior Manager',
+  'M2/P4': 'Staff / Senior Mgr',
+  'M3/P5': 'Principal',
+  'M4/P6': 'Director',
+  'M6': 'VP',
+};
+
+const PILLARS = [
+  {
+    icon: '🎯',
+    name: 'Strategic Thinking',
+    color: '#2D7DD2',
+    behaviors: [
+      'Demonstrates customer obsession and curiosity',
+      'Uses business acumen and critical thinking',
+      'Executes with a strategic focus',
+      'Demonstrates creative confidence',
+    ],
+    excellence: 'Understands detailed customer profiles and journeys. Identifies customer problems through market insights and CDI/D4D. Conducts business performance analyses to pinpoint growth.',
+  },
+  {
+    icon: '💬',
+    name: 'Compelling Communication',
+    color: '#F0C808',
+    behaviors: [
+      'Effectively conveys messages and ideas',
+      'Influences with impact',
+      'Plans and delivers integrated approach',
+      'Activates with cultural intelligence',
+    ],
+    excellence: 'Presents messages and demonstrates collaborative leadership. Captures attention from stakeholders using insights and data-driven approach. Creates unified brand narratives.',
+  },
+  {
+    icon: '⚡',
+    name: 'Tech-Forward Thinking & Action',
+    color: '#3BD85E',
+    behaviors: [
+      'Leverages AI for growth',
+      'Adopts innovative technology and data tools',
+      'Builds effective technology partnerships',
+    ],
+    excellence: 'Leverages AI as a co-pilot to optimize routine marketing tasks. Harnesses data and technology to drive personalized customer experiences.',
+  },
+  {
+    icon: '📊',
+    name: 'Insightful Analysis & Experimentation',
+    color: '#FF5C37',
+    behaviors: [
+      'Makes data-fluent decisions',
+      'Analyzes data to uncover business insights',
+      'Designs and implements bold experiments',
+    ],
+    excellence: 'Uses data to build business cases and deliver outcomes. Understands and uses key marketing metrics. Rapidly iterates and tests customer-backed hypotheses.',
+  },
+];
+
+const PHASES = [
+  { id: '0', name: 'Business Prioritization', d: 'Thom Horton', a: 'Emma Rogers', deliverables: 'Aligned PoV · Stack-ranked priorities · GTM strategy', gate: 'SLT/GM/working alignment · Go/no-go on forecast', dRole: '' },
+  { id: '1', name: 'Inbound Product & Business Strategy', d: 'PMM', a: 'SVP / GBSG PMM', deliverables: 'MRD · PMF assessment · Positioning & messaging', gate: 'Go/no-go on messaging, product, audience, timeline', dRole: 'PMM' },
+  { id: '2a', name: 'Inbound GTM Planning & Strategy', d: 'PMM', a: 'SVP / GBSG PMM', deliverables: 'Finalized GTM strategy', gate: 'Go/no-go on business & campaign brief', dRole: 'PMM' },
+  { id: '2b', name: 'Outbound GTM Orchestration', d: 'PMM', a: 'SVP / GBSG PMM', deliverables: 'Business briefs (ELM, Marketing Services)', gate: 'Same as 2a', dRole: 'PMM' },
+  { id: '3a', name: 'Integrated GTM Campaign Plan', d: 'Brand Lead', a: 'CMO', deliverables: 'Integrated GTM plan · Readiness checklist · Creative brief', gate: 'Per Phase 3', dRole: 'Brand' },
+  { id: '3b', name: 'Channel & Media Strategy', d: 'Marketing Services', a: 'CMO', deliverables: 'E2E media plan · Cross-channel execution · Playbook', gate: 'Per Phase 3', dRole: 'Performance' },
+  { id: '3c', name: 'Creative Development & Production', d: 'Brand', a: 'CMO', deliverables: 'Approved concepts · Finalized creative assets', gate: 'Go/no-go on finalized creative', dRole: 'Creative' },
+  { id: '4a', name: 'Market & Channel Activation', d: 'Marketing Services, Comms', a: 'CMO + VP GBSG', deliverables: 'Approved concepts · Finalized creative assets', gate: 'Go/no-go on activation', dRole: 'Communications' },
+  { id: '4b', name: 'In-season Optimization', d: 'Marketing Services, Comms', a: 'CMO + VP GBSG', deliverables: 'Performance reports · Learnings · Business impact', gate: 'Same as 4a', dRole: 'Performance' },
+];
+
+// Events use real Date objects (year, month-0indexed, day) so we can group by month
+const EVENTS_DATA = [
+  // April 2026 (current month)
+  { id: 'ev01', date: new Date(2026, 3, 15), title: 'Decision Making Velocity — Session 2', type: 'Session', provider: 'Intuit', desc: 'Recording &amp; workbook available.', families: ['All'], levels: ['All'], past: true },
+  { id: 'ev02', date: new Date(2026, 3, 22), title: 'Office Hours: Craft Skills Rubric', type: 'Office Hours', provider: 'Intuit', desc: 'Ask anything about the FY26 rubric — bring your self-assessment.', families: ['All'], levels: ['All'] },
+  { id: 'ev03', date: new Date(2026, 3, 24), title: 'WoW Decisions Drop-In', type: 'Office Hours', provider: 'Intuit', desc: '30 min. Bring a specific decision you\'re navigating.', families: ['Marketing','Marketing Ops'], levels: ['All'] },
+  { id: 'ev04', date: new Date(2026, 3, 28), title: 'AI Tools in Marketing — Live Workshop', type: 'Workshop', provider: 'Intuit', desc: 'Hands-on with Claude Skills, Adobe Express AI, and ChatGPT for marketing tasks.', families: ['All'], levels: ['All'] },
+  // May 2026
+  { id: 'ev05', date: new Date(2026, 4, 6),  title: 'Brand Audit Workshop', type: 'Workshop', provider: 'Intuit', desc: 'Apply the brand audit Skill to your own files.', families: ['Marketing','Communications'], levels: ['M1/P3','M2/P4','M3/P5'] },
+  { id: 'ev06', date: new Date(2026, 4, 14), title: 'Executive Storytelling — Reforge Cohort', type: 'LLE', provider: 'Reforge', desc: 'Six-week external cohort on senior-level narrative and exec presence. Cohort capped at 25.', families: ['All'], levels: ['M2/P4','M3/P5','M4/P6','M6'] },
+  { id: 'ev07', date: new Date(2026, 4, 22), title: 'Measurement &amp; Attribution Cert', type: 'Workshop', provider: 'ANA', desc: 'ANA-led certification on cross-channel measurement and MMM fundamentals.', families: ['Marketing','Market Research'], levels: ['M1/P3','M2/P4','M3/P5'] },
+  { id: 'ev08', date: new Date(2026, 4, 29), title: 'SEAL Hour — May', type: 'Session', provider: 'Intuit', desc: 'Monthly hour for craft development. Pick any topic.', families: ['All'], levels: ['All'] },
+  // June 2026
+  { id: 'ev09', date: new Date(2026, 5, 3),  title: 'AI Fluency for M&amp;C — Cohort 4', type: 'LLE', provider: 'Intuit', desc: 'Six-week cohort. Apply Claude, ChatGPT, and approved tools to live workflows. Apply by May 25.', families: ['All'], levels: ['All'] },
+  { id: 'ev10', date: new Date(2026, 5, 11), title: 'Data Storytelling on LinkedIn Learning', type: 'Session', provider: 'LinkedIn', desc: 'Self-paced course unlocked via your Intuit LinkedIn Learning license.', families: ['All'], levels: ['All'] },
+  { id: 'ev11', date: new Date(2026, 5, 18), title: 'Mobile Marketing Insights — MMA Webinar', type: 'Session', provider: 'MMA', desc: 'MMA virtual session on mobile-first marketing strategy.', families: ['Marketing','Market Research'], levels: ['M1/P3','M2/P4','M3/P5'] },
+  { id: 'ev12', date: new Date(2026, 5, 26), title: 'SEAL Hour — June', type: 'Session', provider: 'Intuit', desc: 'Monthly hour for craft development.', families: ['All'], levels: ['All'] },
+  // July 2026
+  { id: 'ev13', date: new Date(2026, 6, 9),  title: 'Strategic Storytelling Workshop', type: 'Workshop', provider: 'Intuit', desc: 'Narrative arc, data integration, exec Q&amp;A prep.', families: ['All'], levels: ['M2/P4','M3/P5','M4/P6'] },
+  { id: 'ev14', date: new Date(2026, 6, 17), title: 'Office Hours: GenAI Tools', type: 'Office Hours', provider: 'Intuit', desc: 'Drop in with questions about approved AI tools.', families: ['All'], levels: ['All'] },
+  // March 2026 (past)
+  { id: 'ev00', date: new Date(2026, 2, 28), title: 'Creative Ops: From Strain to System', type: 'LLE', provider: 'Intuit', desc: "Mos\\' &amp; team on the future state of creative operations.", families: ['All'], levels: ['All'], past: true },
+];
+
+const EVENT_TYPE_COLORS = {
+  'LLE': '#236CFF',
+  'Workshop': '#3BD85E',
+  'Session': '#F9C741',
+  'Office Hours': '#7B2D8E',
+};
+const EVENT_TYPE_BG = {
+  'LLE': '#E8F0FF',
+  'Workshop': '#E6F9EA',
+  'Session': '#FFF8E1',
+  'Office Hours': '#F5ECFA',
+};
+
+// Provider color map (the new primary visual axis on chips)
+const PROVIDER_COLORS = {
+  'Intuit':   '#236CFF', // Super Blue
+  'LinkedIn': '#0A66C2', // LinkedIn brand dark blue
+  'ANA':      '#3BD85E', // Kiwi green
+  'MMA':      '#FF5C37', // Tomato red
+  'Reforge':  '#000000', // Black
+};
+// Soft tint of provider color for chip backgrounds (~14% alpha as hex)
+const PROVIDER_BG = {
+  'Intuit':   '#E8F0FF',
+  'LinkedIn': '#E1ECF7',
+  'ANA':      '#E6F9EA',
+  'MMA':      '#FFE7E1',
+  'Reforge':  '#F0F0F0',
+};
+
+// Type → Lucide icon (small glyph that sits next to the title)
+const TYPE_ICON = {
+  'LLE':         'graduation-cap',
+  'Workshop':    'wrench',
+  'Session':     'video',
+  'Office Hours':'message-circle-question',
+};
+
+// State for events page
+const EVENTS_STATE = {
+  currentMonth: 3, // April (0-indexed)
+  currentYear: 2026,
+  subscribedEvents: new Set(),
+  masterSubscribed: false,
+  viewMode: 'calendar', // 'calendar' | 'agenda'
+  selectedDay: null, // YYYY-MM-DD when a day is clicked in calendar view
+  providerFilter: 'All', // 'All' or one of PROVIDER_COLORS keys
+};
+
+const CLAUDE_SKILLS_DATA = [
+  { icon: 'pen-tool', name: 'Creative Brief Builder', desc: "Walks through Intuit's 4-step methodology and produces a polished .docx." },
+  { icon: 'bar-chart-3', name: 'Measurement Plan Builder', desc: 'Build a complete campaign measurement plan — KPIs, attribution, sign-off.' },
+  { icon: 'rocket', name: 'GTM Strategy Advisor', desc: 'Input product and ICP — get structured GTM positioning, channels, sequencing.' },
+  { icon: 'presentation', name: 'Executive Review Coach', desc: 'Prep your exec narrative, data story, and Q&A for any senior-level review.' },
+  { icon: 'palette', name: 'Brand Audit (Creative)', desc: 'Audit design files against Intuit brand standards — colors, fonts, lockups.' },
+  { icon: 'compass', name: 'Skill Gap Analyzer', desc: 'Get a personalized learning plan mapped to your craft skills rubric and level.' },
+];
+
+// ============ MOCK SEARCH DATA ============
+const MOCK = {
+  agents: [
+    { id:'a1', title:'Craft Skills Rubric Explorer', source:'Built-in AI', time:'Instant', format:'Interactive AI', diff:'All Levels', families:['All'], levels:['All'], topic:'strategic', pillar:'All Pillars' },
+    { id:'a2', title:'Exec Review Simulator', source:'Built-in AI', time:'Instant', format:'Interactive AI', diff:'Intermediate', families:['All'], levels:['M1/P3','M2/P4','M3/P5','M4/P6','M6'], topic:'communication', pillar:'Compelling Communication' },
+    { id:'a3', title:'Measurement Copilot', source:'Built-in AI', time:'Instant', format:'Chatbot', diff:'All Levels', families:['Marketing','Market Research'], levels:['All'], topic:'analysis', pillar:'Insightful Analysis' },
+    { id:'a4', title:'Creative Brief Builder', source:'Built-in AI', time:'Instant', format:'Interactive AI', diff:'All Levels', families:['All'], levels:['All'], topic:'communication', pillar:'Compelling Communication' },
+  ],
+  playbooks: [
+    { id:'p1', title:'Campaign Measurement Framework', source:'Drive', time:'15 min', format:'Framework', diff:'All Levels', families:['All'], levels:['All'], topic:'analysis', pillar:'Insightful Analysis' },
+    { id:'p2', title:'Exec Review Prep Guide & Checklist', source:'Drive', time:'10 min', format:'Checklist', diff:'Intermediate', families:['All'], levels:['M1/P3','M2/P4','M3/P5','M4/P6','M6'], topic:'communication', pillar:'Compelling Communication' },
+    { id:'p3', title:'GTM Decision Matrix', source:'Drive', time:'20 min', format:'Framework', diff:'Advanced', families:['Marketing','Marketing Ops'], levels:['M2/P4','M3/P5','M4/P6'], topic:'operations', pillar:'Strategic Thinking' },
+    { id:'p4', title:'Creative Operating Model Narrative', source:'Drive', time:'30 min', format:'Strategy Doc', diff:'Advanced', families:['All'], levels:['M3/P5','M4/P6','M6'], topic:'strategic', pillar:'Strategic Thinking' },
+  ],
+  courses: [
+    { id:'c1', title:'CDI/D4D for Customer Obsession', source:'Docebo', time:'2 hrs', format:'Video Course', diff:'Intermediate', families:['Marketing','Market Research'], levels:['P2','M1/P3','M2/P4'], topic:'strategic', pillar:'Strategic Thinking' },
+    { id:'c2', title:'Executive Storytelling & Framing', source:'Docebo', time:'1.5 hrs', format:'Video + Exercise', diff:'Intermediate', families:['All'], levels:['M2/P4','M3/P5','M4/P6','M6'], topic:'communication', pillar:'Compelling Communication' },
+    { id:'c3', title:'Marketing Mix Modeling', source:'Reforge', time:'4 hrs', format:'External Cohort', diff:'Advanced', families:['Marketing'], levels:['M1/P3','M2/P4','M3/P5'], topic:'analysis', pillar:'Insightful Analysis' },
+    { id:'c4', title:'GenAI Tools for Our Workforce', source:'Docebo', time:'1 hr', format:'Mandatory Training', diff:'All Levels', families:['All'], levels:['All'], topic:'tech', pillar:'Tech-Forward' },
+  ],
+  skills: [
+    { id:'s1', title:'Strategic Thinking', source:'Craft Rubric', time:'Ongoing', format:'Pillar', diff:'All Levels', families:['All'], levels:['All'], topic:'strategic', pillar:'Strategic Thinking' },
+    { id:'s2', title:'Compelling Communication', source:'Craft Rubric', time:'Ongoing', format:'Pillar', diff:'All Levels', families:['All'], levels:['All'], topic:'communication', pillar:'Compelling Communication' },
+    { id:'s3', title:'Tech-Forward Thinking', source:'Craft Rubric', time:'Ongoing', format:'Pillar', diff:'All Levels', families:['All'], levels:['All'], topic:'tech', pillar:'Tech-Forward' },
+    { id:'s4', title:'Insightful Analysis', source:'Craft Rubric', time:'Ongoing', format:'Pillar', diff:'All Levels', families:['All'], levels:['All'], topic:'analysis', pillar:'Insightful Analysis' },
+  ],
+  events: [
+    { id:'e1', title:'SEAL Hour — Monthly Craft Development', source:'SEAL Program', time:'Last Fri/Mo', format:'Dedicated Learning', diff:'All Levels', families:['All'], levels:['All'], topic:'strategic', pillar:'All Pillars' },
+    { id:'e2', title:'AI Tools in Marketing Workshop', source:'Live Event', time:'Tomorrow', format:'Virtual Session', diff:'All Levels', families:['All'], levels:['All'], topic:'tech', pillar:'Tech-Forward' },
+    { id:'e3', title:'Executive Presence Masterclass', source:'Live Event', time:'May 14', format:'Live Coaching', diff:'Intermediate', families:['All'], levels:['M2/P4','M3/P5','M4/P6','M6'], topic:'communication', pillar:'Compelling Communication' },
+    { id:'e4', title:'D4D Innovation Sprint', source:'Live Event', time:'Next Wed', format:'Workshop', diff:'Intermediate', families:['All'], levels:['P2','M1/P3','M2/P4'], topic:'strategic', pillar:'Strategic Thinking' },
+  ],
+};
+
+const CATEGORY_META = {
+  agents:    { icon: 'bot',         color: '#FF5C37', bg: '#FFF0EC', label: 'AI Agents — Act Now' },
+  playbooks: { icon: 'file-text',   color: '#003E31', bg: '#E6F5F1', label: 'Playbooks & Frameworks' },
+  courses:   { icon: 'book-open',   color: '#236CFF', bg: '#E8F0FF', label: 'Courses & Learning' },
+  skills:    { icon: 'award',       color: '#AC6500', bg: '#FFF2C1', label: 'Craft Skills to Develop' },
+  events:    { icon: 'calendar',    color: '#7B2D8E', bg: '#F5ECFA', label: 'Events & Community' },
+};
+
+const PILLAR_COLORS = {
+  'Strategic Thinking': '#2D7DD2',
+  'Compelling Communication': '#F0C808',
+  'Tech-Forward': '#3BD85E',
+  'Insightful Analysis': '#FF5C37',
+  'All Pillars': '#236CFF',
+};
+
+const DIFF_COLORS = {
+  'Beginner': '#3BD85E',
+  'Intermediate': '#F9C741',
+  'Advanced': '#FF5C37',
+  'All Levels': '#236CFF',
+};
+
+const QUICK_PROMPTS = [
+  { icon: 'bar-chart-3', label: 'Build a measurement plan', query: 'I need to prepare a measurement plan for a campaign' },
+  { icon: 'presentation', label: 'Prepare for an exec review', query: "I'm preparing for an exec review" },
+  { icon: 'cpu', label: 'Leverage AI tools in my workflow', query: 'How do I integrate GenAI tools?' },
+  { icon: 'zap', label: 'Understand the Creative Operating Model', query: 'Help me understand the Creative Operating Model' },
+];
+
+// ============ TAB SWITCHING ============
+function setView(tab) {
+  STATE.tab = tab;
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + tab).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector('[data-tab="' + tab + '"]').classList.add('active');
+  window.scrollTo(0, 0);
+  if (tab === 'home') resetHome();
+}
+document.querySelectorAll('[data-tab]').forEach(btn => {
+  btn.onclick = () => setView(btn.dataset.tab);
+});
+
+function resetHome() {
+  document.getElementById('chat-area').classList.add('hidden');
+  document.getElementById('quick-prompts-wrap').classList.remove('hidden');
+  document.getElementById('search-input').value = '';
+  updateSubmitButton();
+}
+
+// ============ USER UI SYNC ============
+function renderUserUI() {
+  const u = STATE.user;
+  const initials = u.name.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
+  document.getElementById('user-initials').textContent = initials;
+  const ctxLong = `${u.level} ${u.role} · ${u.family}`;
+  const ctxShort = `${u.level} · ${u.role} · ${u.family}`;
+  document.getElementById('prompt-context').textContent = ctxLong;
+  document.getElementById('chat-context').textContent = ctxShort;
+  document.getElementById('skills-name').textContent = u.name.split(' ')[0];
+  document.getElementById('skills-context').textContent = `${LEVEL_TITLES[u.level]} · ${u.role} · ${u.family}`;
+  document.getElementById('wow-user-role').textContent = `${u.role} (${u.level})`;
+  // New profile pill on Home
+  const pill = document.getElementById('profile-pill-context');
+  if (pill) pill.textContent = ctxLong;
+  // Legacy dropdowns (removed in v4.2 — guarded for safety)
+  const fSel = document.getElementById('sel-family');
+  const rSel = document.getElementById('sel-role');
+  const lSel = document.getElementById('sel-level');
+  if (fSel) fSel.value = u.family;
+  if (rSel) rSel.value = u.role;
+  if (lSel) lSel.value = u.level;
+}
+
+['sel-family', 'sel-role', 'sel-level'].forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return; // dropdown removed from Home in v4.2
+  el.addEventListener('change', e => {
+    if (id === 'sel-family') STATE.user.family = e.target.value;
+    if (id === 'sel-role') STATE.user.role = e.target.value;
+    if (id === 'sel-level') {
+      STATE.user.level = e.target.value;
+      STATE.currentLevel = e.target.value;
+    }
+    renderAll();
+  });
+});
+
+// Profile pill on Home opens SSO modal (one-click role swap for testers)
+const profilePill = document.getElementById('profile-pill');
+if (profilePill) profilePill.onclick = () => document.getElementById('sso-button').click();
+
+// ============ QUICK PROMPTS ============
+function renderQuickPrompts() {
+  document.getElementById('quick-prompts').innerHTML = QUICK_PROMPTS.map(p => `
+    <button class="quick-card bg-white border border-rule rounded-xl px-4 py-3.5 text-left flex items-center gap-2.5 text-sm font-semibold text-text-soft shadow-sm" data-quickprompt="${p.query}">
+      <div class="w-8 h-8 rounded-lg bg-accent-light flex items-center justify-center flex-shrink-0">
+        <i data-lucide="${p.icon}" class="w-4 h-4 text-super-blue"></i>
+      </div>
+      ${p.label}
+    </button>
+  `).join('');
+  lucide.createIcons();
+  document.querySelectorAll('[data-quickprompt]').forEach(btn => {
+    btn.onclick = () => runSearch(btn.dataset.quickprompt);
+  });
+}
+
+// ============ SEARCH ============
+const searchInput = document.getElementById('search-input');
+const searchSubmit = document.getElementById('search-submit');
+function updateSubmitButton() {
+  if (searchInput.value.trim()) {
+    searchSubmit.classList.remove('bg-rule-soft', 'text-muted');
+    searchSubmit.classList.add('bg-super-blue', 'text-white');
+    searchSubmit.style.boxShadow = '0 2px 8px rgba(35, 108, 255, 0.3)';
+  } else {
+    searchSubmit.classList.add('bg-rule-soft', 'text-muted');
+    searchSubmit.classList.remove('bg-super-blue', 'text-white');
+    searchSubmit.style.boxShadow = 'none';
+  }
+}
+searchInput.addEventListener('input', updateSubmitButton);
+document.getElementById('search-form').addEventListener('submit', e => {
+  e.preventDefault();
+  if (searchInput.value.trim()) runSearch(searchInput.value);
+});
+
+function runSearch(query) {
+  document.getElementById('quick-prompts-wrap').classList.add('hidden');
+  document.getElementById('chat-area').classList.remove('hidden');
+  document.getElementById('chat-query').textContent = '"' + query + '"';
+  document.getElementById('ai-results').classList.add('hidden');
+  const proc = document.getElementById('ai-processing');
+  proc.classList.remove('hidden');
+  proc.classList.add('flex');
+
+  const steps = [
+    { text: `Analyzing ${STATE.user.role} craft skills at ${STATE.user.level}…`, icon: 'brain' },
+    { text: 'Scanning playbooks, courses, agents, events…', icon: 'search' },
+    { text: 'Curating your personalized action plan…', icon: 'target' },
+  ];
+  document.getElementById('processing-steps').innerHTML = steps.map((s, i) => `
+    <div class="step flex items-center gap-2.5 text-sm font-semibold text-muted" data-step="${i}">
+      <i data-lucide="${s.icon}" class="w-4 h-4"></i><span>${s.text}</span>
+    </div>
+  `).join('');
+  lucide.createIcons();
+
+  steps.forEach((_, i) => {
+    setTimeout(() => {
+      const el = document.querySelector(`[data-step="${i}"]`);
+      if (el) el.classList.add('active');
+    }, 400 + i * 600);
+  });
+
+  setTimeout(() => {
+    proc.classList.add('hidden');
+    proc.classList.remove('flex');
+    showResults(query);
+  }, 2400);
+}
+
+function showResults(query) {
+  const ql = query.toLowerCase();
+  let topic = 'strategic';
+  if (ql.includes('measur') || ql.includes('data') || ql.includes('analytic')) topic = 'analysis';
+  if (ql.includes('exec') || ql.includes('storytell') || ql.includes('review') || ql.includes('brief') || ql.includes('present')) topic = 'communication';
+  if (ql.includes('ai') || ql.includes('genai') || ql.includes('tech') || ql.includes('tool')) topic = 'tech';
+  if (ql.includes('velocity') || ql.includes('operat') || ql.includes('governance') || ql.includes('decision')) topic = 'operations';
+
+  const u = STATE.user;
+  const filter = (arr) => arr.filter(it =>
+    (it.families.includes('All') || it.families.includes(u.family)) &&
+    (it.levels.includes('All') || it.levels.includes(u.level)) &&
+    (it.topic === topic || it.topic === 'strategic')
+  ).slice(0, 2);
+
+  const why = `Curated for ${u.level} ${u.role} in ${u.family}.`;
+  const outcome = 'Concrete skill development aligned to your craft rubric.';
+
+  const results = {
+    agents: filter(MOCK.agents),
+    playbooks: filter(MOCK.playbooks),
+    courses: filter(MOCK.courses),
+    skills: filter(MOCK.skills),
+    events: filter(MOCK.events),
+  };
+
+  document.getElementById('results-summary').innerHTML = `Curated for you as a <span class="text-super-blue font-bold">${u.level} ${u.role}</span> in ${u.family}.`;
+
+  const html = Object.entries(results).map(([key, items]) => {
+    if (!items.length) return '';
+    const m = CATEGORY_META[key];
+    return `
+      <div class="mb-7">
+        <div class="flex items-center gap-2 mb-3.5 pb-2.5 border-b-2" style="border-color: ${m.bg};">
+          <div class="w-7 h-7 rounded-md flex items-center justify-center" style="background: ${m.bg};">
+            <i data-lucide="${m.icon}" class="w-3.5 h-3.5" style="color: ${m.color};"></i>
+          </div>
+          <span class="text-xs font-extrabold uppercase tracking-wider" style="color: ${m.color};">${m.label}</span>
+        </div>
+        ${items.map(it => `
+          <div class="result-card bg-white border border-rule rounded-2xl p-5 mb-2.5 cursor-pointer">
+            <div class="flex gap-4">
+              <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style="background: ${m.bg};">
+                <i data-lucide="${m.icon}" class="w-5 h-5" style="color: ${m.color};"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-start justify-between gap-3 mb-2 flex-wrap">
+                  <h4 class="text-base font-extrabold text-blueberry leading-snug">${it.title}</h4>
+                  <div class="flex gap-1.5 flex-shrink-0">
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-wintermint text-muted uppercase tracking-wider">${it.source}</span>
+                    <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-wintermint text-muted flex items-center gap-1"><i data-lucide="clock" class="w-2.5 h-2.5"></i>${it.time}</span>
+                  </div>
+                </div>
+                <div class="flex gap-1.5 mb-3 flex-wrap">
+                  <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-wintermint text-text-soft">${it.format}</span>
+                  <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full border" style="background: ${(DIFF_COLORS[it.diff] || '#236CFF')}14; color: ${DIFF_COLORS[it.diff] || '#236CFF'}; border-color: ${DIFF_COLORS[it.diff] || '#236CFF'}30;">${it.diff}</span>
+                  ${it.pillar ? `<span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full" style="background: ${(PILLAR_COLORS[it.pillar] || '#236CFF')}14; color: ${PILLAR_COLORS[it.pillar] || '#236CFF'};">${it.pillar}</span>` : ''}
+                </div>
+                <div class="grid grid-cols-2 gap-2.5">
+                  <div class="bg-wintermint rounded-lg px-3.5 py-2.5 border border-rule-soft">
+                    <span class="text-[9px] font-extrabold text-muted uppercase tracking-wider block mb-1">Why it's relevant</span>
+                    <p class="text-xs text-text-soft leading-relaxed">${why}</p>
+                  </div>
+                  <div class="bg-wintermint rounded-lg px-3.5 py-2.5 border border-rule-soft">
+                    <span class="text-[9px] font-extrabold text-muted uppercase tracking-wider block mb-1">Expected outcome</span>
+                    <p class="text-xs text-text-soft leading-relaxed">${outcome}</p>
+                  </div>
+                </div>
+              </div>
+              <i data-lucide="arrow-right" class="w-4 h-4 text-muted flex-shrink-0 mt-1"></i>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('results-categories').innerHTML = html;
+  const r = document.getElementById('ai-results');
+  r.classList.remove('hidden');
+  r.classList.add('flex');
+  lucide.createIcons();
+
+  document.querySelectorAll('.result-card').forEach((card, i) => {
+    setTimeout(() => card.classList.add('visible'), 100 * (i + 1));
+  });
+}
+
+// ============ MY SKILLS ============
+function renderJobFamilySelector() {
+  document.getElementById('job-family-selector').innerHTML = JOB_FAMILIES.map(f => `
+    <button class="px-4 py-2 rounded-full text-sm font-semibold transition border ${f === STATE.user.family ? 'bg-blueberry text-white border-blueberry' : 'bg-white text-muted border-rule hover:border-blueberry hover:text-blueberry'}" data-family="${f}">
+      ${f}${f === STATE.user.family ? ' · you' : ''}
+    </button>
+  `).join('');
+  document.querySelectorAll('[data-family]').forEach(btn => {
+    btn.onclick = () => {
+      STATE.user.family = btn.dataset.family;
+      renderAll();
+    };
+  });
+}
+
+function renderLevelSelector() {
+  document.getElementById('level-selector').innerHTML = P_LEVELS.map(level => `
+    <button class="px-4 py-2 rounded-full text-sm font-semibold transition border ${level === STATE.currentLevel ? 'bg-super-blue text-white border-super-blue' : 'bg-white text-muted border-rule hover:border-blueberry hover:text-blueberry'}" data-level="${level}">
+      ${level}${level === STATE.user.level ? ' · you' : ''}
+    </button>
+  `).join('');
+  document.querySelectorAll('[data-level]').forEach(btn => {
+    btn.onclick = () => {
+      STATE.currentLevel = btn.dataset.level;
+      renderLevelSelector();
+      renderPillars();
+    };
+  });
+}
+
+function renderPillars() {
+  document.getElementById('pillars-grid').innerHTML = PILLARS.map(p => `
+    <div class="pillar-card bg-white border border-rule rounded-2xl p-6">
+      <div class="text-3xl mb-4">${p.icon}</div>
+      <h3 class="text-xl font-bold text-blueberry mb-4 leading-snug">${p.name}</h3>
+      <ul class="space-y-2 mb-5 pb-5 border-b border-rule-soft">
+        ${p.behaviors.map(b => `<li class="text-sm text-blueberry leading-relaxed">${b}</li>`).join('')}
+      </ul>
+      <div class="eyebrow mb-2" style="color: ${p.color};">${STATE.user.family.toUpperCase()} · ${STATE.currentLevel} · WHAT EXCELLENCE LOOKS LIKE</div>
+      <p class="text-sm text-text-soft leading-relaxed">${p.excellence}</p>
+    </div>
+  `).join('');
+}
+
+// ============ EVENTS (calendar agenda) ============
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+function isEventRelevantForUser(ev) {
+  const u = STATE.user;
+  return (ev.families.includes('All') || ev.families.includes(u.family)) &&
+         (ev.levels.includes('All') || ev.levels.includes(u.level));
+}
+
+function renderEventCard(ev, opts = {}) {
+  const provider = ev.provider || 'Intuit';
+  const provColor = PROVIDER_COLORS[provider] || '#236CFF';
+  const provBg = PROVIDER_BG[provider] || '#E8F0FF';
+  const typeIcon = TYPE_ICON[ev.type] || 'circle';
+  const day = ev.date.getDate();
+  const dow = DAY_NAMES[ev.date.getDay()];
+  const isSubscribed = EVENTS_STATE.subscribedEvents.has(ev.id);
+  const relevant = isEventRelevantForUser(ev);
+
+  return `
+    <div class="card-hover bg-white border border-rule rounded-2xl p-5 flex items-start gap-5 ${opts.muted ? 'opacity-60' : ''}">
+      <div class="text-center min-w-[68px] flex-shrink-0">
+        <div class="text-[10px] font-bold uppercase tracking-wider text-muted">${dow}</div>
+        <div class="text-3xl font-extrabold text-blueberry leading-none mt-1">${day}</div>
+      </div>
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded" style="background: ${provBg}; color: ${provColor};">${provider}</span>
+          ${relevant ? '<span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-accent-light text-super-blue">Recommended for you</span>' : ''}
+        </div>
+        <div class="flex items-center gap-2 mb-1">
+          <i data-lucide="${typeIcon}" class="w-4 h-4 text-muted flex-shrink-0" title="${ev.type}"></i>
+          <span class="text-base font-bold text-blueberry leading-snug">${ev.title}</span>
+        </div>
+        <p class="text-sm text-text-soft leading-relaxed">${ev.desc}</p>
+      </div>
+      <div class="flex flex-col items-end gap-2 flex-shrink-0">
+        <button class="text-sm font-bold text-super-blue hover:text-super-blue-dark whitespace-nowrap">RSVP →</button>
+        <button data-subscribe-event="${ev.id}" class="flex items-center gap-1 text-xs font-semibold transition ${isSubscribed ? 'text-super-blue' : 'text-muted hover:text-super-blue'}">
+          <i data-lucide="${isSubscribed ? 'bell-ring' : 'bell'}" class="w-3.5 h-3.5"></i>
+          ${isSubscribed ? 'Subscribed' : 'Subscribe'}
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+// ============ CALENDAR GRID (monthly view) ============
+function dayKey(year, month, day) {
+  return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+}
+
+function renderCalendarGrid() {
+  const wrap = document.getElementById('calendar-grid');
+  if (!wrap) return;
+
+  const { currentMonth, currentYear } = EVENTS_STATE;
+  const firstDay = new Date(currentYear, currentMonth, 1);
+  const lastDay = new Date(currentYear, currentMonth + 1, 0);
+  const startDow = firstDay.getDay(); // 0=Sun
+  const totalDays = lastDay.getDate();
+
+  // Build map of day → events (filtered by provider)
+  const eventsByDay = {};
+  EVENTS_DATA
+    .filter(ev => !ev.past && ev.date.getMonth() === currentMonth && ev.date.getFullYear() === currentYear)
+    .filter(ev => EVENTS_STATE.providerFilter === 'All' || ev.provider === EVENTS_STATE.providerFilter)
+    .forEach(ev => {
+      const d = ev.date.getDate();
+      if (!eventsByDay[d]) eventsByDay[d] = [];
+      eventsByDay[d].push(ev);
+    });
+
+  const monthLabel = `${MONTH_NAMES[currentMonth]} ${currentYear}`;
+  const isCurrentMonth = (currentMonth === new Date().getMonth() && currentYear === new Date().getFullYear());
+  const today = new Date();
+  const todayDate = today.getDate();
+
+  // Header
+  let html = `
+    <div class="mb-4 flex items-baseline gap-3">
+      <h2 class="text-2xl font-extrabold text-blueberry tracking-tight">${monthLabel}</h2>
+      ${isCurrentMonth ? '<span class="text-xs font-bold text-super-blue uppercase tracking-wider">Current month</span>' : ''}
+    </div>
+    <div class="overflow-x-auto -mx-1 px-1">
+      <div class="bg-white border border-rule rounded-2xl overflow-hidden" style="min-width: 560px;">
+      <div class="grid grid-cols-7 bg-wintermint border-b border-rule-soft">
+        ${['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d => `
+          <div class="px-2 py-2 text-[10px] font-bold uppercase tracking-wider text-muted text-center">${d}</div>
+        `).join('')}
+      </div>
+      <div class="grid grid-cols-7">
+  `;
+
+  // Empty leading cells before day 1
+  for (let i = 0; i < startDow; i++) {
+    html += `<div class="border-r border-b border-rule-soft bg-wintermint/40" style="min-height: 110px;"></div>`;
+  }
+
+  // Day cells
+  for (let day = 1; day <= totalDays; day++) {
+    const evs = eventsByDay[day] || [];
+    const isToday = isCurrentMonth && day === todayDate;
+    const dayKeyStr = dayKey(currentYear, currentMonth, day);
+    const isSelected = EVENTS_STATE.selectedDay === dayKeyStr;
+
+    let cellClass = 'border-r border-b border-rule-soft p-2 cursor-pointer transition relative';
+    if (isSelected) cellClass += ' bg-accent-light';
+    else cellClass += ' bg-white hover:bg-wintermint/50';
+
+    let dayNumClass = 'text-xs font-bold mb-1';
+    if (isToday) dayNumClass += ' text-white bg-super-blue rounded-full w-5 h-5 flex items-center justify-center';
+    else dayNumClass += ' text-blueberry';
+
+    html += `
+      <div class="${cellClass}" data-day="${dayKeyStr}" data-day-num="${day}" style="min-height: 110px;">
+        <div class="flex justify-end">
+          <span class="${dayNumClass}">${day}</span>
+        </div>
+        <div class="space-y-1 mt-1">
+    `;
+
+    // Up to 3 chips, then "+ N more"
+    const visibleEvs = evs.slice(0, 3);
+    visibleEvs.forEach(ev => {
+      const provider = ev.provider || 'Intuit';
+      const provColor = PROVIDER_COLORS[provider] || '#236CFF';
+      const provBg = PROVIDER_BG[provider] || '#E8F0FF';
+      const typeIcon = TYPE_ICON[ev.type] || 'circle';
+      const truncated = ev.title.length > 20 ? ev.title.slice(0, 18) + '…' : ev.title;
+      const isSubscribed = EVENTS_STATE.subscribedEvents.has(ev.id);
+      html += `
+        <div class="text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1" style="background: ${provBg}; color: ${provColor};" title="${ev.title} · ${ev.type} · ${provider}">
+          <i data-lucide="${typeIcon}" class="w-2.5 h-2.5 flex-shrink-0" style="color: ${provColor};"></i>
+          ${isSubscribed ? '<span style="font-size: 8px;">●</span>' : ''}
+          <span class="truncate">${truncated}</span>
+        </div>
+      `;
+    });
+    if (evs.length > 3) {
+      html += `<div class="text-[10px] font-semibold text-muted">+ ${evs.length - 3} more</div>`;
+    }
+
+    html += `</div></div>`;
+  }
+
+  // Trailing empty cells
+  const totalCells = startDow + totalDays;
+  const remainder = totalCells % 7;
+  if (remainder !== 0) {
+    for (let i = 0; i < 7 - remainder; i++) {
+      html += `<div class="border-r border-b border-rule-soft bg-wintermint/40" style="min-height: 110px;"></div>`;
+    }
+  }
+
+  html += `</div></div></div>`;
+
+  // Empty-state hint
+  const totalMonthEvents = Object.values(eventsByDay).reduce((sum, a) => sum + a.length, 0);
+  if (totalMonthEvents === 0) {
+    html += `<p class="text-sm text-muted mt-4 text-center">No events scheduled for ${monthLabel}. Use Today to return, or check the next month.</p>`;
+  }
+
+  wrap.innerHTML = html;
+
+  // Wire day clicks
+  document.querySelectorAll('[data-day]').forEach(cell => {
+    cell.onclick = () => {
+      EVENTS_STATE.selectedDay = cell.dataset.day;
+      renderCalendarGrid();
+      renderCalendarDetailPanel();
+    };
+  });
+
+  lucide.createIcons();
+}
+
+function renderCalendarDetailPanel() {
+  const panel = document.getElementById('calendar-detail-panel');
+  if (!panel) return;
+
+  const sel = EVENTS_STATE.selectedDay;
+  if (!sel) {
+    // Default: prompt user to pick a day
+    panel.innerHTML = `
+      <div class="text-center py-8">
+        <i data-lucide="mouse-pointer-click" class="w-7 h-7 text-muted mx-auto mb-3"></i>
+        <p class="text-sm font-bold text-blueberry mb-1">Click any day</p>
+        <p class="text-xs text-muted leading-relaxed">Select a day in the calendar to see full event details, RSVP, or subscribe.</p>
+      </div>
+    `;
+    lucide.createIcons();
+    return;
+  }
+
+  // Parse YYYY-MM-DD
+  const [yStr, mStr, dStr] = sel.split('-');
+  const year = parseInt(yStr, 10);
+  const month = parseInt(mStr, 10) - 1;
+  const day = parseInt(dStr, 10);
+  const dateObj = new Date(year, month, day);
+  const dow = dateObj.toLocaleDateString('en-US', { weekday: 'long' });
+  const longDate = `${MONTH_NAMES[month]} ${day}`;
+
+  const evs = EVENTS_DATA.filter(ev =>
+    !ev.past &&
+    ev.date.getFullYear() === year &&
+    ev.date.getMonth() === month &&
+    ev.date.getDate() === day &&
+    (EVENTS_STATE.providerFilter === 'All' || ev.provider === EVENTS_STATE.providerFilter)
+  );
+
+  let html = `
+    <div class="border-b border-rule-soft pb-3 mb-4">
+      <div class="eyebrow text-super-blue mb-1">${dow}</div>
+      <div class="text-2xl font-extrabold text-blueberry tracking-tight">${longDate}</div>
+      <div class="text-xs text-muted mt-1">${evs.length} event${evs.length === 1 ? '' : 's'}</div>
+    </div>
+  `;
+
+  if (evs.length === 0) {
+    html += `<p class="text-sm text-muted">Nothing scheduled. Subscribe above to be notified when events match your role.</p>`;
+  } else {
+    html += `<div class="space-y-3">`;
+    evs.forEach(ev => {
+      const provider = ev.provider || 'Intuit';
+      const provColor = PROVIDER_COLORS[provider] || '#236CFF';
+      const provBg = PROVIDER_BG[provider] || '#E8F0FF';
+      const typeIcon = TYPE_ICON[ev.type] || 'circle';
+      const isSubscribed = EVENTS_STATE.subscribedEvents.has(ev.id);
+      const relevant = isEventRelevantForUser(ev);
+      html += `
+        <div class="border border-rule rounded-xl p-3.5">
+          <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded" style="background: ${provBg}; color: ${provColor};">${provider}</span>
+            ${relevant ? '<span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-accent-light text-super-blue">For you</span>' : ''}
+          </div>
+          <div class="flex items-start gap-2 mb-1">
+            <i data-lucide="${typeIcon}" class="w-3.5 h-3.5 text-muted flex-shrink-0 mt-0.5" title="${ev.type}"></i>
+            <span class="text-sm font-bold text-blueberry leading-snug">${ev.title}</span>
+          </div>
+          <p class="text-xs text-text-soft leading-relaxed mb-3 ml-5">${ev.desc}</p>
+          <div class="flex items-center justify-between gap-2">
+            <button class="text-xs font-bold text-super-blue hover:text-super-blue-dark">RSVP →</button>
+            <button data-subscribe-event="${ev.id}" class="flex items-center gap-1 text-[11px] font-semibold transition ${isSubscribed ? 'text-super-blue' : 'text-muted hover:text-super-blue'}">
+              <i data-lucide="${isSubscribed ? 'bell-ring' : 'bell'}" class="w-3 h-3"></i>
+              ${isSubscribed ? 'Subscribed' : 'Subscribe'}
+            </button>
+          </div>
+        </div>
+      `;
+    });
+    html += `</div>`;
+  }
+
+  panel.innerHTML = html;
+
+  // Wire subscribe buttons inside the panel
+  panel.querySelectorAll('[data-subscribe-event]').forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      const id = btn.dataset.subscribeEvent;
+      if (EVENTS_STATE.subscribedEvents.has(id)) {
+        EVENTS_STATE.subscribedEvents.delete(id);
+      } else {
+        EVENTS_STATE.subscribedEvents.add(id);
+      }
+      renderCalendarGrid();
+      renderCalendarDetailPanel();
+    };
+  });
+
+  lucide.createIcons();
+}
+
+function setEventsView(mode) {
+  EVENTS_STATE.viewMode = mode;
+  document.getElementById('calendar-view').classList.toggle('hidden', mode !== 'calendar');
+  document.getElementById('agenda-container').classList.toggle('hidden', mode !== 'agenda');
+  // Toggle button styles
+  const calBtn = document.getElementById('view-calendar');
+  const agBtn = document.getElementById('view-agenda');
+  if (mode === 'calendar') {
+    calBtn.classList.add('bg-super-blue', 'text-white');
+    calBtn.classList.remove('text-muted', 'hover:text-blueberry');
+    agBtn.classList.remove('bg-super-blue', 'text-white');
+    agBtn.classList.add('text-muted', 'hover:text-blueberry');
+  } else {
+    agBtn.classList.add('bg-super-blue', 'text-white');
+    agBtn.classList.remove('text-muted', 'hover:text-blueberry');
+    calBtn.classList.remove('bg-super-blue', 'text-white');
+    calBtn.classList.add('text-muted', 'hover:text-blueberry');
+  }
+  if (mode === 'calendar') {
+    renderCalendarGrid();
+    renderCalendarDetailPanel();
+  } else {
+    renderAgenda();
+  }
+}
+
+function renderAgenda() {
+  const { currentMonth, currentYear } = EVENTS_STATE;
+
+  // Filter events to current month, exclude past, apply provider filter
+  const currentMonthEvents = EVENTS_DATA
+    .filter(ev => !ev.past && ev.date.getMonth() === currentMonth && ev.date.getFullYear() === currentYear)
+    .filter(ev => EVENTS_STATE.providerFilter === 'All' || ev.provider === EVENTS_STATE.providerFilter)
+    .sort((a, b) => a.date - b.date);
+
+  // Group by day
+  const byDay = {};
+  currentMonthEvents.forEach(ev => {
+    const day = ev.date.getDate();
+    if (!byDay[day]) byDay[day] = [];
+    byDay[day].push(ev);
+  });
+
+  const monthLabel = `${MONTH_NAMES[currentMonth]} ${currentYear}`;
+  const todayMarker = (currentMonth === new Date().getMonth() && currentYear === new Date().getFullYear()) ? '<span class="ml-2 text-xs font-bold text-super-blue uppercase tracking-wider">Current</span>' : '';
+
+  let html = `
+    <div class="mb-2 flex items-baseline gap-3 pb-3 border-b-2 border-blueberry">
+      <h2 class="text-2xl font-extrabold text-blueberry tracking-tight">${monthLabel}</h2>
+      ${todayMarker}
+      <span class="text-sm text-muted ml-auto">${currentMonthEvents.length} event${currentMonthEvents.length === 1 ? '' : 's'}</span>
+    </div>
+  `;
+
+  if (currentMonthEvents.length === 0) {
+    html += `
+      <div class="text-center py-16">
+        <i data-lucide="calendar-x" class="w-10 h-10 text-muted mx-auto mb-3"></i>
+        <p class="text-text-soft">No events scheduled for ${monthLabel}.</p>
+        <p class="text-sm text-muted mt-1">Try the next month, or subscribe above to be notified.</p>
+      </div>
+    `;
+  } else {
+    Object.keys(byDay).sort((a, b) => a - b).forEach(day => {
+      html += `<div class="mt-6 space-y-3">`;
+      byDay[day].forEach(ev => { html += renderEventCard(ev); });
+      html += `</div>`;
+    });
+  }
+
+  document.getElementById('agenda-container').innerHTML = html;
+
+  // Wire subscribe buttons
+  document.querySelectorAll('[data-subscribe-event]').forEach(btn => {
+    btn.onclick = () => {
+      const id = btn.dataset.subscribeEvent;
+      if (EVENTS_STATE.subscribedEvents.has(id)) {
+        EVENTS_STATE.subscribedEvents.delete(id);
+      } else {
+        EVENTS_STATE.subscribedEvents.add(id);
+      }
+      renderAgenda();
+    };
+  });
+
+  lucide.createIcons();
+}
+
+function renderPastEvents() {
+  const past = EVENTS_DATA.filter(ev => ev.past).sort((a, b) => b.date - a.date);
+  const wrap = document.getElementById('past-events-list');
+  if (!wrap) return;
+  if (past.length === 0) {
+    wrap.innerHTML = '<p class="text-sm text-muted py-4">No past events.</p>';
+    return;
+  }
+  wrap.innerHTML = past.map(ev => `<div class="mb-3">${renderEventCard(ev, { muted: true })}</div>`).join('');
+  lucide.createIcons();
+}
+
+function renderEventsHeader() {
+  const u = STATE.user;
+  const sub = document.getElementById('sub-role-context');
+  if (sub) sub.textContent = `${u.role} · ${u.family}`;
+
+  const masterBtn = document.getElementById('master-subscribe');
+  const masterLabel = document.getElementById('master-subscribe-label');
+  if (masterBtn && masterLabel) {
+    if (EVENTS_STATE.masterSubscribed) {
+      masterBtn.classList.remove('bg-white', 'text-blueberry');
+      masterBtn.classList.add('bg-super-blue', 'text-white');
+      masterLabel.textContent = 'Subscribed';
+    } else {
+      masterBtn.classList.add('bg-white', 'text-blueberry');
+      masterBtn.classList.remove('bg-super-blue', 'text-white');
+      masterLabel.textContent = 'Subscribe';
+    }
+  }
+}
+
+// Wire month nav + view toggle (runs once at init)
+function wireEventsControls() {
+  const prev = document.getElementById('month-prev');
+  const next = document.getElementById('month-next');
+  const today = document.getElementById('month-today');
+  const master = document.getElementById('master-subscribe');
+
+  // Helper: re-render whichever view is active, plus clear selected day
+  const refreshActiveView = () => {
+    EVENTS_STATE.selectedDay = null;
+    if (EVENTS_STATE.viewMode === 'calendar') {
+      renderCalendarGrid();
+      renderCalendarDetailPanel();
+    } else {
+      renderAgenda();
+    }
+  };
+
+  if (prev) prev.onclick = () => {
+    EVENTS_STATE.currentMonth--;
+    if (EVENTS_STATE.currentMonth < 0) {
+      EVENTS_STATE.currentMonth = 11;
+      EVENTS_STATE.currentYear--;
+    }
+    refreshActiveView();
+  };
+  if (next) next.onclick = () => {
+    EVENTS_STATE.currentMonth++;
+    if (EVENTS_STATE.currentMonth > 11) {
+      EVENTS_STATE.currentMonth = 0;
+      EVENTS_STATE.currentYear++;
+    }
+    refreshActiveView();
+  };
+  if (today) today.onclick = () => {
+    // Snap to a populated month — April 2026 is where the demo data lives
+    EVENTS_STATE.currentMonth = new Date().getMonth();
+    EVENTS_STATE.currentYear = new Date().getFullYear();
+    refreshActiveView();
+  };
+  if (master) master.onclick = () => {
+    EVENTS_STATE.masterSubscribed = !EVENTS_STATE.masterSubscribed;
+    renderEventsHeader();
+  };
+
+  // View toggle (Calendar / Agenda)
+  const calBtn = document.getElementById('view-calendar');
+  const agBtn = document.getElementById('view-agenda');
+  if (calBtn) calBtn.onclick = () => setEventsView('calendar');
+  if (agBtn) agBtn.onclick = () => setEventsView('agenda');
+
+  // Provider filter dropdown
+  const providerSel = document.getElementById('provider-filter');
+  if (providerSel) providerSel.onchange = (e) => {
+    EVENTS_STATE.providerFilter = e.target.value;
+    refreshActiveView();
+  };
+}
+
+// ============ WAYS OF WORKING ============
+function renderPhases() {
+  const userRole = STATE.user.role;
+  document.getElementById('phases-table').innerHTML = `
+    <div class="grid grid-cols-12 gap-4 px-5 py-3 bg-wintermint border-b border-rule eyebrow">
+      <div class="col-span-1">Phase</div>
+      <div class="col-span-3">Name</div>
+      <div class="col-span-2">D · A</div>
+      <div class="col-span-3">Key Deliverables</div>
+      <div class="col-span-3">Stage Gate</div>
+    </div>
+    ${PHASES.map(p => `
+      <div class="phase-row grid grid-cols-12 gap-4 px-5 py-4 border-b border-rule-soft text-sm ${p.dRole === userRole ? 'user-fits' : ''}">
+        <div class="col-span-1 text-2xl font-light text-blueberry leading-none">${p.id}</div>
+        <div class="col-span-3">
+          <div class="font-bold text-blueberry leading-snug">${p.name}</div>
+          ${p.dRole === userRole ? '<div class="text-xs text-super-blue mt-1 font-bold">← Your role drives this phase</div>' : ''}
+        </div>
+        <div class="col-span-2 text-xs text-text-soft leading-relaxed">
+          <div><b class="text-blueberry">D:</b> ${p.d}</div>
+          <div><b class="text-blueberry">A:</b> ${p.a}</div>
+        </div>
+        <div class="col-span-3 text-xs text-text-soft leading-relaxed">${p.deliverables}</div>
+        <div class="col-span-3 text-xs text-text-soft leading-relaxed">${p.gate}</div>
+      </div>
+    `).join('')}
+  `;
+}
+
+// ============ GENAI HUB ============
+function renderClaudeSkills() {
+  document.getElementById('claude-skills').innerHTML = CLAUDE_SKILLS_DATA.map(s => `
+    <div class="card-hover bg-white border border-rule rounded-2xl p-5">
+      <i data-lucide="${s.icon}" class="w-6 h-6 text-super-blue mb-3"></i>
+      <div class="text-lg font-bold text-blueberry mb-2 leading-snug">${s.name}</div>
+      <p class="text-sm text-text-soft mb-4 leading-relaxed">${s.desc}</p>
+      <a href="#" class="text-sm font-bold text-super-blue">Launch Skill →</a>
+    </div>
+  `).join('');
+  lucide.createIcons();
+}
+
+// ============ MY SKILLS DASHBOARD ============
+// Per-role mock data. Bars are draggable — overrides stored in DASHBOARD_STATE.
+const DASHBOARD_STATE = {
+  bars: {}, // { 'Strategic Thinking': 65, ... } per current role
+};
+
+const SKILL_DATA_BY_FAMILY = {
+  'Marketing': {
+    focus: 'QuickBooks GTM',
+    bars: [
+      { name: 'Strategic Thinking', pct: 65, label: 'Intermediate', color: '#2D7DD2' },
+      { name: 'Compelling Communication', pct: 75, label: 'Senior', color: '#F0C808' },
+      { name: 'Tech-Forward Thinking', pct: 40, label: 'Beginner', color: '#3BD85E' },
+      { name: 'Insightful Analysis', pct: 55, label: 'Intermediate', color: '#FF5C37' },
+    ],
+    tip: "Based on your upcoming PMM post-mortem, I've prepared a custom 'Execution Analysis' prompt for your strategy draft.",
+    benchmarks: [
+      { icon: 'calendar', iconBg: '#FFF2C1', iconColor: '#AC6500', title: 'Q4 Strategy Review', sub: 'Oct 24 · Global Leadership' },
+      { icon: 'award', iconBg: '#E8F0FF', iconColor: '#236CFF', title: 'Role Certification', sub: 'P5 Advanced PMM Status' },
+    ],
+    gapCount: 2,
+  },
+  'Communications': {
+    focus: 'Q3 Internal Narrative',
+    bars: [
+      { name: 'Strategic Thinking', pct: 55, label: 'Intermediate', color: '#2D7DD2' },
+      { name: 'Compelling Communication', pct: 85, label: 'Lead', color: '#F0C808' },
+      { name: 'Tech-Forward Thinking', pct: 45, label: 'Beginner', color: '#3BD85E' },
+      { name: 'Insightful Analysis', pct: 50, label: 'Intermediate', color: '#FF5C37' },
+    ],
+    tip: "Your CEO town-hall prep — I've drafted a 3-act narrative arc tied to your Q2 wins. Want to review?",
+    benchmarks: [
+      { icon: 'mic', iconBg: '#F5ECFA', iconColor: '#7B2D8E', title: 'CEO Town Hall', sub: 'Nov 8 · All-hands' },
+      { icon: 'award', iconBg: '#E8F0FF', iconColor: '#236CFF', title: 'Comms Lead Cert', sub: 'P5 Standards' },
+    ],
+    gapCount: 2,
+  },
+  'Marketing Ops': {
+    focus: 'GTM Decision Matrix v2',
+    bars: [
+      { name: 'Strategic Thinking', pct: 70, label: 'Senior', color: '#2D7DD2' },
+      { name: 'Compelling Communication', pct: 50, label: 'Intermediate', color: '#F0C808' },
+      { name: 'Tech-Forward Thinking', pct: 60, label: 'Intermediate', color: '#3BD85E' },
+      { name: 'Insightful Analysis', pct: 75, label: 'Senior', color: '#FF5C37' },
+    ],
+    tip: "Your team's Q3 capacity model has 3 unresolved trade-offs. I've flagged them in priority order.",
+    benchmarks: [
+      { icon: 'sliders', iconBg: '#E6F5F1', iconColor: '#003E31', title: 'Capacity Review', sub: 'Nov 15 · Ops Council' },
+      { icon: 'award', iconBg: '#E8F0FF', iconColor: '#236CFF', title: 'Ops Lead Cert', sub: 'P5 Strategic Ops' },
+    ],
+    gapCount: 1,
+  },
+  'Market Research': {
+    focus: 'Self-Employed Insight Wave 4',
+    bars: [
+      { name: 'Strategic Thinking', pct: 60, label: 'Intermediate', color: '#2D7DD2' },
+      { name: 'Compelling Communication', pct: 70, label: 'Senior', color: '#F0C808' },
+      { name: 'Tech-Forward Thinking', pct: 35, label: 'Beginner', color: '#3BD85E' },
+      { name: 'Insightful Analysis', pct: 90, label: 'Lead', color: '#FF5C37' },
+    ],
+    tip: "Wave 4 fielding hits next Tuesday. I've drafted 5 hypothesis-led questions for your screener.",
+    benchmarks: [
+      { icon: 'search', iconBg: '#FFF0EC', iconColor: '#FF5C37', title: 'Wave 4 Readout', sub: 'Dec 2 · Insights Council' },
+      { icon: 'award', iconBg: '#E8F0FF', iconColor: '#236CFF', title: 'Research Lead Cert', sub: 'P5 D4D Master' },
+    ],
+    gapCount: 2,
+  },
+};
+
+const RECOMMENDED_NEXT_BY_FAMILY = {
+  'Marketing': [
+    { source: 'Reforge', sourceColor: '#236CFF', title: 'Advanced Growth Series', outcome: 'Scientific growth experimentation framework', time: '12h' },
+    { source: 'Docebo', sourceColor: '#003E31', title: 'The Intuit Way of GTM', outcome: 'Standardized GTM launch readiness', time: '2h' },
+  ],
+  'Communications': [
+    { source: 'Internal', sourceColor: '#7B2D8E', title: 'Executive Storytelling Lab', outcome: 'Narrative arc + exec Q&A mastery', time: '3h' },
+    { source: 'Docebo', sourceColor: '#003E31', title: 'The Intuit Way of M&C', outcome: 'Brand-true comms across channels', time: '2h' },
+  ],
+  'Marketing Ops': [
+    { source: 'ANA', sourceColor: '#AC6500', title: 'Marketing Ops Certification', outcome: 'Cross-functional ops fluency', time: '8h' },
+    { source: 'Internal', sourceColor: '#7B2D8E', title: 'Decision Velocity Cert', outcome: '1-way vs 2-way door fluency', time: '1.5h' },
+  ],
+  'Market Research': [
+    { source: 'Reforge', sourceColor: '#236CFF', title: 'Quant + Qual Research', outcome: 'Mixed-methods rigor for product calls', time: '10h' },
+    { source: 'Docebo', sourceColor: '#003E31', title: 'CDI/D4D for Customer Obsession', outcome: 'Customer-driven innovation playbook', time: '2h' },
+  ],
+};
+
+function renderSkillsHero() {
+  const u = STATE.user;
+  const data = SKILL_DATA_BY_FAMILY[u.family] || SKILL_DATA_BY_FAMILY['Marketing'];
+  const focusEl = document.getElementById('current-focus');
+  const gapEl = document.getElementById('gap-count');
+  const tipEl = document.getElementById('coach-tip-text');
+  if (focusEl) focusEl.textContent = data.focus;
+  if (gapEl) gapEl.textContent = data.gapCount;
+  if (tipEl) tipEl.textContent = data.tip;
+}
+
+function renderSkillBars() {
+  const u = STATE.user;
+  const data = SKILL_DATA_BY_FAMILY[u.family] || SKILL_DATA_BY_FAMILY['Marketing'];
+
+  // Initialize/reset overrides for this family
+  data.bars.forEach(b => {
+    const key = u.family + '::' + b.name;
+    if (DASHBOARD_STATE.bars[key] === undefined) {
+      DASHBOARD_STATE.bars[key] = b.pct;
+    }
+  });
+
+  const wrap = document.getElementById('skill-bars');
+  if (!wrap) return;
+
+  wrap.innerHTML = data.bars.map(b => {
+    const key = u.family + '::' + b.name;
+    const pct = DASHBOARD_STATE.bars[key];
+    return `
+      <div data-bar="${b.name}">
+        <div class="flex justify-between items-baseline mb-1.5">
+          <span class="text-xs font-bold text-blueberry">${b.name}</span>
+          <span class="text-[10px] text-muted">${b.label}</span>
+        </div>
+        <div class="relative h-2 rounded-full bg-wintermint cursor-pointer skill-bar-track" data-key="${key}" data-color="${b.color}">
+          <div class="absolute top-0 left-0 h-2 rounded-full transition-all" style="width: ${pct}%; background: ${b.color};"></div>
+          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-white border-2 shadow-sm" style="left: ${pct}%; border-color: ${b.color};"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Wire drag-to-set on each bar
+  document.querySelectorAll('.skill-bar-track').forEach(track => {
+    let dragging = false;
+    const setFromEvent = (e) => {
+      const rect = track.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const x = clientX - rect.left;
+      const pct = Math.max(0, Math.min(100, Math.round((x / rect.width) * 100)));
+      DASHBOARD_STATE.bars[track.dataset.key] = pct;
+      // Live update without full re-render
+      const fill = track.querySelector('div:first-child');
+      const handle = track.querySelector('div:last-child');
+      fill.style.width = pct + '%';
+      handle.style.left = pct + '%';
+    };
+    track.addEventListener('mousedown', e => { dragging = true; setFromEvent(e); });
+    track.addEventListener('touchstart', e => { dragging = true; setFromEvent(e); });
+    document.addEventListener('mousemove', e => { if (dragging) setFromEvent(e); });
+    document.addEventListener('touchmove', e => { if (dragging) setFromEvent(e); });
+    document.addEventListener('mouseup', () => { dragging = false; });
+    document.addEventListener('touchend', () => { dragging = false; });
+  });
+}
+
+function renderBenchmarks() {
+  const u = STATE.user;
+  const data = SKILL_DATA_BY_FAMILY[u.family] || SKILL_DATA_BY_FAMILY['Marketing'];
+  const wrap = document.getElementById('benchmarks-list');
+  if (!wrap) return;
+  wrap.innerHTML = data.benchmarks.map(b => `
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background: ${b.iconBg};">
+        <i data-lucide="${b.icon}" class="w-4 h-4" style="color: ${b.iconColor};"></i>
+      </div>
+      <div class="flex-1 min-w-0">
+        <div class="text-sm font-bold text-blueberry leading-tight">${b.title}</div>
+        <div class="text-[11px] text-muted">${b.sub}</div>
+      </div>
+    </div>
+  `).join('');
+  lucide.createIcons();
+}
+
+function renderRecommendedNext() {
+  const u = STATE.user;
+  const items = RECOMMENDED_NEXT_BY_FAMILY[u.family] || RECOMMENDED_NEXT_BY_FAMILY['Marketing'];
+  const wrap = document.getElementById('recommended-next');
+  if (!wrap) return;
+  wrap.innerHTML = items.map(it => `
+    <div class="card-hover bg-white border border-rule rounded-2xl p-5 cursor-pointer">
+      <div class="flex items-start justify-between mb-3">
+        <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded" style="background: ${it.sourceColor}14; color: ${it.sourceColor};">${it.source}</span>
+        <span class="text-xs text-muted flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i>${it.time}</span>
+      </div>
+      <h4 class="text-base font-extrabold text-blueberry mb-1.5 leading-snug">${it.title}</h4>
+      <p class="text-sm text-muted italic leading-relaxed">"Outcome: ${it.outcome}"</p>
+    </div>
+  `).join('');
+  lucide.createIcons();
+}
+
+// ============ FOCUS SKILLS (navy panel) ============
+function renderSkillsDashboard() {
+  renderSkillsHero();
+  renderSkillBars();
+  renderBenchmarks();
+  renderRecommendedNext();
+  renderFocusPanel();
+  renderFocusedCoachTip();
+  renderFocusedRecommendedNext();
+}
+
+// Per-user focus selections: { 'Strategic Thinking': 'Develop', ... }
+const FOCUS_STATE = {
+  selections: {}, // skill name -> 'Maintain' | 'Develop' | 'Lead'
+  filterFamily: null, // null = use SSO family
+};
+
+// Skill metadata — colors & icons match the Home family-faces DNA
+const FOCUS_SKILLS = [
+  { name: 'Strategic Thinking', color: '#236CFF', icon: 'chess' },
+  { name: 'Compelling Communication', color: '#3BD85E', icon: 'speech' },
+  { name: 'Tech-Forward Thinking', color: '#F9C741', icon: 'arrow' },
+  { name: 'Insightful Analysis', color: '#FF5C37', icon: 'chart' },
+];
+
+const FOCUS_TIERS = ['Maintain', 'Develop', 'Lead'];
+const TIER_DESC = {
+  'Maintain': 'Keep current strength sharp.',
+  'Develop':  'Active growth area for this cycle.',
+  'Lead':     'Become the go-to expert.',
+};
+
+// SVG glyphs that mirror the family-faces visual style: colored circle + simple white symbol
+function focusSkillIcon(color, glyph) {
+  let symbol = '';
+  if (glyph === 'chess') {
+    // simple knight-piece silhouette
+    symbol = `
+      <path d="M 32 70 L 62 70 L 62 65 L 60 60 L 56 56 L 50 50 L 48 44 L 52 38 L 50 32 L 44 30 L 38 34 L 36 42 L 32 46 L 30 52 L 32 58 Z"
+            fill="white"/>
+      <rect x="28" y="70" width="38" height="6" rx="1.5" fill="white"/>
+    `;
+  } else if (glyph === 'speech') {
+    // two overlapping speech bubbles
+    symbol = `
+      <path d="M 24 30 Q 24 24 30 24 L 56 24 Q 62 24 62 30 L 62 46 Q 62 52 56 52 L 38 52 L 30 60 L 32 52 Q 24 52 24 46 Z" fill="white"/>
+      <circle cx="34" cy="38" r="2" fill="${color}"/>
+      <circle cx="42" cy="38" r="2" fill="${color}"/>
+      <circle cx="50" cy="38" r="2" fill="${color}"/>
+    `;
+  } else if (glyph === 'arrow') {
+    // upward bar chart with arrow
+    symbol = `
+      <rect x="24" y="58" width="8" height="14" rx="1.5" fill="white"/>
+      <rect x="36" y="48" width="8" height="24" rx="1.5" fill="white"/>
+      <rect x="48" y="38" width="8" height="34" rx="1.5" fill="white"/>
+      <path d="M 60 32 L 70 22 M 70 22 L 64 22 M 70 22 L 70 28" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    `;
+  } else if (glyph === 'chart') {
+    // magnifying glass over a chart
+    symbol = `
+      <circle cx="56" cy="38" r="11" stroke="white" stroke-width="3.5" fill="none"/>
+      <line x1="64" y1="46" x2="72" y2="54" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+      <rect x="22" y="58" width="6" height="14" rx="1" fill="white"/>
+      <rect x="32" y="52" width="6" height="20" rx="1" fill="white"/>
+      <rect x="42" y="60" width="6" height="12" rx="1" fill="white"/>
+    `;
+  }
+  return `<svg viewBox="0 0 94 94" xmlns="http://www.w3.org/2000/svg"><circle cx="47" cy="47" r="44" fill="${color}"/>${symbol}</svg>`;
+}
+
+// Currently displayed family for focus panel (defaults to SSO)
+function focusActiveFamily() {
+  return FOCUS_STATE.filterFamily || STATE.user.family;
+}
+
+function renderFocusFamilyTabs() {
+  const wrap = document.getElementById('focus-family-tabs');
+  if (!wrap) return;
+  const families = ['Marketing', 'Communications', 'Marketing Ops', 'Market Research'];
+  const active = focusActiveFamily();
+  wrap.innerHTML = families.map(f => {
+    const isActive = f === active;
+    return `
+      <button data-focus-family="${f}" class="px-4 py-2.5 text-sm font-bold transition rounded-t-lg ${isActive ? 'bg-white text-blueberry' : 'text-white/70 hover:text-white hover:bg-white/5'}">
+        ${f}${f === STATE.user.family ? ' <span class="text-[10px] font-bold opacity-60">· you</span>' : ''}
+      </button>
+    `;
+  }).join('');
+  document.querySelectorAll('[data-focus-family]').forEach(btn => {
+    btn.onclick = () => {
+      FOCUS_STATE.filterFamily = btn.dataset.focusFamily;
+      renderFocusPanel();
+    };
+  });
+}
+
+function renderFocusSkillRows() {
+  const wrap = document.getElementById('focus-skill-rows');
+  if (!wrap) return;
+
+  // Get current Skill Health bar data for this family to show proficiency
+  const family = focusActiveFamily();
+  const dashData = SKILL_DATA_BY_FAMILY[family] || SKILL_DATA_BY_FAMILY['Marketing'];
+
+  wrap.innerHTML = FOCUS_SKILLS.map(skill => {
+    const dashBar = dashData.bars.find(b => b.name === skill.name || b.name.startsWith(skill.name.split(' ')[0]));
+    const profLabel = dashBar ? dashBar.label : 'Intermediate';
+    const profPct = dashBar ? dashBar.pct : 50;
+    const selectedTier = FOCUS_STATE.selections[skill.name];
+
+    return `
+      <div class="bg-white rounded-xl p-4 flex items-center gap-4">
+        <div class="w-12 h-12 flex-shrink-0">${focusSkillIcon(skill.color, skill.icon)}</div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-1 flex-wrap">
+            <h4 class="text-base font-extrabold text-blueberry leading-tight">${skill.name}</h4>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded" style="background: ${skill.color}1A; color: ${skill.color};">Currently · ${profLabel}</span>
+          </div>
+          <div class="text-xs text-muted">${selectedTier ? `Goal · <span class="font-bold" style="color: ${skill.color};">${selectedTier}</span> — ${TIER_DESC[selectedTier]}` : 'Pick a goal level →'}</div>
+        </div>
+        <div class="flex gap-1.5 flex-shrink-0">
+          ${FOCUS_TIERS.map(tier => {
+            const active = selectedTier === tier;
+            return `
+              <button data-focus-skill="${skill.name}" data-focus-tier="${tier}"
+                      class="px-3 py-1.5 text-xs font-bold rounded-lg border transition whitespace-nowrap ${active ? 'text-white border-transparent' : 'border-rule text-blueberry hover:border-super-blue'}"
+                      style="${active ? `background: ${skill.color};` : ''}">
+                ${tier}
+              </button>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Wire tier buttons
+  document.querySelectorAll('[data-focus-skill]').forEach(btn => {
+    btn.onclick = () => {
+      const skill = btn.dataset.focusSkill;
+      const tier = btn.dataset.focusTier;
+      // Toggle: clicking same tier deselects
+      if (FOCUS_STATE.selections[skill] === tier) {
+        delete FOCUS_STATE.selections[skill];
+      } else {
+        FOCUS_STATE.selections[skill] = tier;
+      }
+      // Side effects: tip + recommended adapt
+      renderFocusSkillRows();
+      renderFocusedCoachTip();
+      renderFocusedRecommendedNext();
+    };
+  });
+
+  // Reset button
+  const resetBtn = document.getElementById('reset-focus');
+  if (resetBtn) resetBtn.onclick = () => {
+    FOCUS_STATE.selections = {};
+    renderFocusSkillRows();
+    renderFocusedCoachTip();
+    renderFocusedRecommendedNext();
+  };
+}
+
+// When focus is selected, override the Daily Coach Tip with one tied to the focus skill
+function renderFocusedCoachTip() {
+  const tipEl = document.getElementById('coach-tip-text');
+  if (!tipEl) return;
+
+  const sel = FOCUS_STATE.selections;
+  const focusEntries = Object.entries(sel);
+
+  // No selection → fall back to per-family default
+  if (focusEntries.length === 0) {
+    const data = SKILL_DATA_BY_FAMILY[STATE.user.family] || SKILL_DATA_BY_FAMILY['Marketing'];
+    tipEl.textContent = data.tip;
+    return;
+  }
+
+  // Find the highest-commitment focus (Lead > Develop > Maintain)
+  const priorityOrder = { 'Lead': 3, 'Develop': 2, 'Maintain': 1 };
+  focusEntries.sort((a, b) => priorityOrder[b[1]] - priorityOrder[a[1]]);
+  const [topSkill, topTier] = focusEntries[0];
+
+  const tipsBySkill = {
+    'Strategic Thinking':       `You're committing to ${topTier} on Strategic Thinking. I've queued the GTM Decision Matrix template and a 15-min CDI/D4D primer for your next session.`,
+    'Compelling Communication': `Aiming to ${topTier} Compelling Communication? I've drafted a 3-act narrative outline for your next exec review using your real Q3 wins.`,
+    'Tech-Forward Thinking':    `${topTier} Tech-Forward this cycle — I've shortlisted three Claude Skills that map to your week's actual work. Ready when you are.`,
+    'Insightful Analysis':      `${topTier} on Insightful Analysis — I've prepped a measurement plan scaffold tied to your current campaign. Want to start there?`,
+  };
+
+  tipEl.textContent = tipsBySkill[topSkill] || `Focused on ${topTier} for ${topSkill} — I'll prioritize that in your next AI Coach query.`;
+}
+
+// When focus is selected, override Recommended Next with skill-aligned cards
+function renderFocusedRecommendedNext() {
+  const wrap = document.getElementById('recommended-next');
+  if (!wrap) return;
+
+  const sel = FOCUS_STATE.selections;
+  const focusEntries = Object.entries(sel);
+
+  // No selection → fall back to family-default recommendations
+  if (focusEntries.length === 0) {
+    renderRecommendedNext();
+    return;
+  }
+
+  // Map focus skills to recommendation pairs
+  const recsBySkill = {
+    'Strategic Thinking': [
+      { source: 'Internal',    sourceColor: '#7B2D8E', title: 'GTM Decision Matrix Workshop',    outcome: 'Make 1-way vs 2-way calls with confidence', time: '1.5h' },
+      { source: 'Reforge',     sourceColor: '#236CFF', title: 'Strategic Product Marketing',      outcome: 'Sharper positioning, cleaner GTM',          time: '8h' },
+    ],
+    'Compelling Communication': [
+      { source: 'Internal',    sourceColor: '#7B2D8E', title: 'Executive Storytelling Lab',       outcome: 'Narrative arc + exec Q&A mastery',          time: '3h' },
+      { source: 'Docebo',      sourceColor: '#003E31', title: 'The Intuit Way of M&C',            outcome: 'Brand-true comms across channels',          time: '2h' },
+    ],
+    'Tech-Forward Thinking': [
+      { source: 'Internal',    sourceColor: '#7B2D8E', title: 'AI Fluency for M&C — Cohort 4',    outcome: 'Apply Claude Skills to live workflows',     time: '6w' },
+      { source: 'Docebo',      sourceColor: '#003E31', title: 'GenAI Tools for Our Workforce',    outcome: 'Mandatory training for tool access',        time: '1h' },
+    ],
+    'Insightful Analysis': [
+      { source: 'Reforge',     sourceColor: '#236CFF', title: 'Marketing Mix Modeling',           outcome: 'Defend channel spend with rigor',           time: '4h' },
+      { source: 'ANA',         sourceColor: '#AC6500', title: 'Measurement & Attribution Cert',   outcome: 'Cross-channel measurement fluency',         time: '6h' },
+    ],
+  };
+
+  // Take the highest-commitment focus
+  const priorityOrder = { 'Lead': 3, 'Develop': 2, 'Maintain': 1 };
+  focusEntries.sort((a, b) => priorityOrder[b[1]] - priorityOrder[a[1]]);
+  const [topSkill] = focusEntries[0];
+
+  const items = recsBySkill[topSkill];
+  if (!items) {
+    renderRecommendedNext();
+    return;
+  }
+
+  wrap.innerHTML = items.map(it => `
+    <div class="card-hover bg-white border border-rule rounded-2xl p-5 cursor-pointer">
+      <div class="flex items-start justify-between mb-3">
+        <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded" style="background: ${it.sourceColor}14; color: ${it.sourceColor};">${it.source}</span>
+        <span class="text-xs text-muted flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i>${it.time}</span>
+      </div>
+      <h4 class="text-base font-extrabold text-blueberry mb-1.5 leading-snug">${it.title}</h4>
+      <p class="text-sm text-muted italic leading-relaxed">"Outcome: ${it.outcome}"</p>
+      <p class="text-[10px] text-super-blue font-bold uppercase tracking-wider mt-3">★ Tied to your focus: ${topSkill}</p>
+    </div>
+  `).join('');
+  lucide.createIcons();
+}
+
+function renderFocusPanel() {
+  renderFocusFamilyTabs();
+  renderFocusSkillRows();
+}
+
+
+// SVG smiley faces, on-brand colors. Click = swap SSO family + trigger AI Coach query.
+const FAMILY_FACES = [
+  { family: 'Marketing',       color: '#236CFF', label: 'Marketing',       sublabel: 'Product, Brand, Performance', eyes: 'closed-up' },
+  { family: 'Communications',  color: '#3BD85E', label: 'Communications',  sublabel: 'Internal, External, Exec',    eyes: 'open' },
+  { family: 'Marketing Ops',   color: '#F9C741', label: 'Marketing Ops',   sublabel: 'Systems, Tools, Process',     eyes: 'wink' },
+  { family: 'Market Research', color: '#FF5C37', label: 'Market Research', sublabel: 'Insights, CDI, D4D',          eyes: 'glasses' },
+];
+
+function faceSVG(color, eyes) {
+  let eyeMarkup = '';
+  if (eyes === 'closed-up') {
+    eyeMarkup = `
+      <path d="M 28 38 Q 33 33 38 38" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M 56 38 Q 61 33 66 38" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+    `;
+  } else if (eyes === 'open') {
+    eyeMarkup = `
+      <circle cx="33" cy="38" r="3" fill="white"/>
+      <circle cx="61" cy="38" r="3" fill="white"/>
+    `;
+  } else if (eyes === 'wink') {
+    eyeMarkup = `
+      <circle cx="33" cy="38" r="3" fill="white"/>
+      <path d="M 56 38 Q 61 35 66 38" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+    `;
+  } else if (eyes === 'glasses') {
+    eyeMarkup = `
+      <circle cx="33" cy="38" r="6" stroke="white" stroke-width="2.5" fill="none"/>
+      <circle cx="61" cy="38" r="6" stroke="white" stroke-width="2.5" fill="none"/>
+      <line x1="39" y1="38" x2="55" y2="38" stroke="white" stroke-width="2.5"/>
+    `;
+  }
+  const mouth = `<path d="M 32 56 Q 47 68 62 56" stroke="white" stroke-width="3.5" fill="none" stroke-linecap="round"/>`;
+  return `<svg viewBox="0 0 94 94" xmlns="http://www.w3.org/2000/svg"><circle cx="47" cy="47" r="44" fill="${color}"/>${eyeMarkup}${mouth}</svg>`;
+}
+
+function renderFamilyFaces() {
+  const wrap = document.getElementById('family-faces');
+  if (!wrap) return;
+  wrap.innerHTML = FAMILY_FACES.map(f => `
+    <button data-face-family="${f.family}" class="quick-card bg-white border border-rule rounded-2xl p-4 flex flex-col items-center gap-3 text-center transition shadow-sm">
+      <div class="w-16 h-16">${faceSVG(f.color, f.eyes)}</div>
+      <div>
+        <div class="text-sm font-bold text-blueberry">${f.label}</div>
+        <div class="text-[11px] text-muted leading-tight mt-0.5">${f.sublabel}</div>
+      </div>
+    </button>
+  `).join('');
+  document.querySelectorAll('[data-face-family]').forEach(btn => {
+    btn.onclick = () => {
+      const fam = btn.dataset.faceFamily;
+      STATE.user.family = fam;
+      renderUserUI();
+      runSearch(`I work in ${fam} — show me what's most relevant for me right now`);
+    };
+  });
+}
+
+// ============ RENDER ALL ============
+function renderAll() {
+  renderUserUI();
+  renderQuickPrompts();
+  renderFamilyFaces();
+  renderJobFamilySelector();
+  renderLevelSelector();
+  renderPillars();
+  renderSkillsDashboard();
+  renderCalendarGrid();
+  renderCalendarDetailPanel();
+  renderAgenda();
+  renderPastEvents();
+  renderEventsHeader();
+  renderPhases();
+  renderClaudeSkills();
+  lucide.createIcons();
+}
+
+// ============ SSO MODAL ============
+const ssoModal = document.getElementById('sso-modal');
+document.getElementById('sso-button').onclick = () => {
+  document.getElementById('input-name').value = STATE.user.name;
+  document.getElementById('input-family').value = STATE.user.family;
+  document.getElementById('input-role').value = STATE.user.role;
+  document.getElementById('input-level').value = STATE.user.level;
+  ssoModal.classList.remove('hidden');
+  ssoModal.classList.add('flex');
+};
+document.getElementById('sso-close').onclick = () => {
+  ssoModal.classList.add('hidden');
+  ssoModal.classList.remove('flex');
+};
+document.getElementById('sso-apply').onclick = () => {
+  STATE.user.name = document.getElementById('input-name').value;
+  STATE.user.family = document.getElementById('input-family').value;
+  STATE.user.role = document.getElementById('input-role').value;
+  STATE.user.level = document.getElementById('input-level').value;
+  STATE.currentLevel = STATE.user.level;
+  renderAll();
+  ssoModal.classList.add('hidden');
+  ssoModal.classList.remove('flex');
+};
+
+// ============ WORK WITH US: form logic ============
+
+// PASTE YOUR GOOGLE APPS SCRIPT URL HERE (after Step 7 setup):
+// Example: 'https://script.google.com/macros/s/AKfycbxxxxxxxxxxxxxxxxxxx/exec'
+const APPS_SCRIPT_URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+const FORM_STATE = { path: 'individual' };
+
+function setFormPath(path) {
+  FORM_STATE.path = path;
+  document.querySelectorAll('.path-btn').forEach(btn => {
+    if (btn.dataset.path === path) {
+      btn.classList.remove('border-rule');
+      btn.classList.add('border-super-blue', 'bg-accent-light');
+    } else {
+      btn.classList.add('border-rule');
+      btn.classList.remove('border-super-blue', 'bg-accent-light');
+    }
+  });
+  document.getElementById('form-path-label').textContent = path === 'manager' ? 'Manager / Director' : 'Individual';
+  // Show/hide manager-only fields
+  document.querySelectorAll('.manager-only-block').forEach(el => {
+    el.classList.toggle('hidden', path !== 'manager');
+  });
+  document.querySelectorAll('.manager-only').forEach(el => {
+    el.classList.toggle('hidden', path !== 'manager');
+  });
+}
+
+document.querySelectorAll('.path-btn').forEach(btn => {
+  btn.onclick = () => setFormPath(btn.dataset.path);
+});
+
+function resetForm() {
+  document.getElementById('lle-form').classList.remove('hidden');
+  document.getElementById('form-success').classList.add('hidden');
+  document.getElementById('lle-form').reset();
+  setFormPath('individual');
+}
+
+document.getElementById('lle-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const submitBtn = document.getElementById('form-submit');
+  const originalText = submitBtn.innerHTML;
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = 'Submitting…';
+
+  // Gather form data
+  const form = e.target;
+  const fd = new FormData(form);
+  const experienceVals = fd.getAll('experience');
+  const payload = {
+    timestamp: new Date().toISOString(),
+    path: FORM_STATE.path,
+    name: fd.get('name') || '',
+    email: fd.get('email') || '',
+    experience: experienceVals.join(', '),
+    pain_point: fd.get('pain_point') || '',
+    why_important: fd.get('why_important') || '',
+    audience: fd.get('audience') || '',
+    budget: fd.get('budget') || '',
+    priority: fd.get('priority') || '',
+    start_date: fd.get('start_date') || '',
+    end_date: fd.get('end_date') || '',
+    user_role: STATE.user.role,
+    user_level: STATE.user.level,
+    user_family: STATE.user.family,
+  };
+
+  // Submit to Google Apps Script (or simulate if URL not set)
+  try {
+    if (APPS_SCRIPT_URL && APPS_SCRIPT_URL.startsWith('https://')) {
+      // Real submission. Apps Script accepts POST with form-encoded body (no CORS preflight).
+      const body = new URLSearchParams();
+      Object.entries(payload).forEach(([k, v]) => body.append(k, v));
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Apps Script /exec does not return CORS headers; this is normal
+        body: body,
+      });
+    } else {
+      // No URL configured yet — simulate so the UI works
+      console.log('[Form] APPS_SCRIPT_URL not set. Payload that would be sent:', payload);
+      await new Promise(r => setTimeout(r, 700));
+    }
+    // Show success state
+    document.getElementById('lle-form').classList.add('hidden');
+    document.getElementById('form-success').classList.remove('hidden');
+    lucide.createIcons();
+  } catch (err) {
+    console.error('Submission error', err);
+    alert('Sorry — something went wrong. Please try again or email MarketingL&D@intuit.com directly.');
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalText;
+  }
+});
+
+// Initialize default path on load
+setFormPath('individual');
+
+
+renderAll();
+wireEventsControls();
+</script>
+
+</body>
+</html>
